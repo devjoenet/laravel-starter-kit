@@ -1,25 +1,35 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/vue-starter-kit",
+    "name": "devjoenet/starter",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "My base project scaffold for new Laravel and Vue based projects.",
     "keywords": [
         "laravel",
-        "framework"
+        "inertiajs",
+        "vue3",
+        "tailwindcss",
+        "reka-ui"
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "inertiajs/inertia-laravel": "^2.0",
+        "internachi/modular": "3.x-dev",
         "laravel/framework": "^12.0",
+        "laravel/horizon": "^5.33",
+        "laravel/reverb":"^1.5",
+        "maatwebsite/excel":"^3.1",
         "laravel/tinker": "^2.10.1",
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.10",
+        "barryvdh/laravel-ide-helper": "^3.0",
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.18",
         "laravel/sail": "^1.41",
+        "laravel/telescope": "^5.0",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^3.8",
@@ -38,6 +48,10 @@
         }
     },
     "scripts": {
+        "ide-helper": [
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
