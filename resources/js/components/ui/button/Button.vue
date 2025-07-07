@@ -2,7 +2,7 @@
   import { cn } from "@/lib/utils";
   import { Primitive, type PrimitiveProps } from "reka-ui";
   import type { HTMLAttributes } from "vue";
-  import { type ButtonVariants, buttonVariants } from ".";
+  import { type ButtonVariants, buttonVariants } from "./buttonVariants"; // Assumes buttonVariants.ts is in the same directory
 
   interface Props extends PrimitiveProps {
     variant?: ButtonVariants["variant"];

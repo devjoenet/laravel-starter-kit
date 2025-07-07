@@ -3,50 +3,72 @@
   import type { CheckboxRootEmits, CheckboxRootProps } from "reka-ui";
   import { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from "reka-ui";
   import { computed, type HTMLAttributes } from "vue";
+  import { reactiveOmit } from "@vueuse/core";
 
-  const props = defineProps<{ class?: HTMLAttributes["class"] } & CheckboxRootProps>();
+  const props = defineProps<
+    {
+      class?: HTMLAttributes["class"];
+      id?: string;
+    } & CheckboxRootProps
+  >();
+
   const emits = defineEmits<CheckboxRootEmits>();
 
-  const delegatedProps = computed(() => {
-    const { class: _, ...delegated } = props;
-
-    return delegated;
-  });
+  const delegatedProps = computed(() => reactiveOmit(props, ["class", "id"]));
 
   const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
   const isIndeterminate = computed(() => props.modelValue === "indeterminate");
+
+  // Generate a unique ID if one isn't provided for the label association
+  const checkboxId = props.id || `checkbox-${Math.random().toString(36).substring(2, 9)}`;
+
+  const checkboxRootClasses = computed(() => {
+    return cn(
+      // --- Base classes ---
+      "peer flex size-5 shrink-0 items-center justify-center rounded border transition-colors",
+      // --- Resting state ---
+      "border-outline",
+      // --- Checked/Indeterminate state ---
+      "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground",
+      "data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary data-[state=indeterminate]:text-primary-foreground",
+      // --- Focus state (M3 style halo) ---
+      "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20",
+      // --- Disabled state ---
+      "disabled:cursor-not-allowed disabled:border-on-surface/12 disabled:bg-on-surface/12",
+      "disabled:data-[state=checked]:bg-on-surface/12 disabled:data-[state=checked]:text-on-surface/38",
+      // --- Invalid state ---
+      "aria-[invalid=true]:border-error",
+    );
+  });
 </script>
 
 <template>
-  <CheckboxRoot
-    data-slot="checkbox"
-    v-bind="forwarded"
-    :class="
-      cn(
-        'peer border-input data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex size-4 shrink-0 items-center justify-center rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-500',
-        props.class,
-      )
-    ">
-    <CheckboxIndicator data-slot="checkbox-indicator" class="grid place-content-center text-current">
-      <svg
-        v-if="isIndeterminate"
-        width="9"
-        height="9"
-        viewBox="0 0 9 9"
-        fill="currentcolor"
-        xmlns="http://www.w3.org/2000/svg">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M0.75 4.5C0.75 4.08579 1.08579 3.75 1.5 3.75H7.5C7.91421 3.75 8.25 4.08579 8.25 4.5C8.25 4.91421 7.91421 5.25 7.5 5.25H1.5C1.08579 5.25 0.75 4.91421 0.75 4.5Z" />
-      </svg>
-      <svg v-else width="9" height="9" viewBox="0 0 9 9" fill="currentcolor" xmlns="http://www.w3.org/2000/svg">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M8.53547 0.62293C8.88226 0.849446 8.97976 1.3142 8.75325 1.66099L4.5083 8.1599C4.38833 8.34356 4.19397 8.4655 3.9764 8.49358C3.75883 8.52167 3.53987 8.45309 3.3772 8.30591L0.616113 5.80777C0.308959 5.52987 0.285246 5.05559 0.563148 4.74844C0.84105 4.44128 1.31533 4.41757 1.62249 4.69547L3.73256 6.60459L7.49741 0.840706C7.72393 0.493916 8.18868 0.396414 8.53547 0.62293Z" />
-      </svg>
-    </CheckboxIndicator>
-  </CheckboxRoot>
+  <label :for="checkboxId" :class="cn('flex items-center gap-x-3 text-base text-on-surface', props.class)">
+    <CheckboxRoot :id="checkboxId" data-slot="checkbox" v-bind="forwarded" :class="checkboxRootClasses">
+      <CheckboxIndicator data-slot="checkbox-indicator" class="grid place-content-center text-current">
+        <!-- Indeterminate Icon (Minus) -->
+        <svg
+          v-if="isIndeterminate"
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.5 6H9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <!-- Checked Icon (Checkmark) -->
+        <svg v-else width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10 3.5L4.5 9L2 6.5"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </CheckboxIndicator>
+    </CheckboxRoot>
+    <!-- Slot for the label text -->
+    <slot />
+  </label>
 </template>

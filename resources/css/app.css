@@ -49,14 +49,14 @@
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
-  /* --- Material 3 Input Variables --- */
-  /* These variables are used by the Vue component. */
-  /* We're aliasing them to your existing theme variables. */
+  /* --- Material 3 Component Variables --- */
   --color-error: var(--destructive);
   --color-on-surface: var(--on-surface);
   --color-on-surface-variant: var(--on-surface-variant);
   --color-surface-container-highest: var(--surface-container-highest);
   --color-outline: var(--outline);
+  --color-on-primary: var(--on-primary);
+  --color-on-error: var(--on-error);
 }
 
 :root {
@@ -76,7 +76,7 @@
   --accent: oklch(0.967 0.001 286.375); /* --color-zinc-100 */
   --accent-foreground: oklch(0.21 0.006 285.885); /* --color-zinc-900 */
   --destructive: oklch(0.637 0.237 25.331); /* --color-red-500 */
-  --destructive-foreground: oklch(0.637 0.237 25.331); /* --color-red-500 */
+  --destructive-foreground: oklch(0.985 0 0); /* --color-zinc-50 */
   --border: oklch(0.92 0.004 286.32); /* --color-zinc-200 */
   --input: oklch(0.871 0.006 286.286); /* --color-zinc-300 */
   --ring: oklch(0.871 0.006 286.286); /* --color-zinc-300 */
@@ -94,11 +94,13 @@
   --sidebar-border: oklch(0.92 0.004 286.32); /* --color-zinc-200 */
   --sidebar-ring: oklch(0.871 0.006 286.286); /* --color-zinc-300 */
 
-  /* --- Material 3 Input Definitions (Light Mode) --- */
+  /* --- Material 3 Definitions (Light Mode) --- */
   --on-surface: var(--foreground);
   --on-surface-variant: var(--muted-foreground);
   --surface-container-highest: var(--secondary);
   --outline: var(--border);
+  --on-primary: var(--primary-foreground);
+  --on-error: var(--destructive-foreground);
 }
 
 .dark {
@@ -116,8 +118,8 @@
   --muted-foreground: oklch(0.65 0.01 286); /* 🔥 near --color-zinc-400 */
   --accent: oklch(0.21 0.006 285.885); /* --color-zinc-900 */
   --accent-foreground: oklch(0.985 0 0); /* --color-zinc-50 */
-  --destructive: oklch(0.396 0.141 25.723); /* --color-red-900 */
-  --destructive-foreground: oklch(0.637 0.237 25.331); /* --color-red-500 */
+  --destructive: oklch(0.707 0.24 25.4); /* --color-red-400 */
+  --destructive-foreground: oklch(0.21 0.006 285.885); /* --color-zinc-900 */
   --border: oklch(0.274 0.006 286.033); /* --color-zinc-800 */
   --input: oklch(0.274 0.006 286.033); /* --color-zinc-800 */
   --ring: oklch(0.442 0.017 285.786); /* --color-zinc-600 */
@@ -135,11 +137,13 @@
   --sidebar-border: oklch(0.274 0.006 286.033); /* --color-zinc-800 */
   --sidebar-ring: oklch(0.442 0.017 285.786); /* --color-zinc-600 */
 
-  /* --- Material 3 Input Definitions (Dark Mode) --- */
+  /* --- Material 3 Definitions (Dark Mode) --- */
   --on-surface: var(--foreground);
   --on-surface-variant: var(--muted-foreground);
   --surface-container-highest: var(--secondary);
   --outline: var(--border);
+  --on-primary: var(--primary-foreground);
+  --on-error: var(--destructive-foreground);
 }
 
 @layer base {

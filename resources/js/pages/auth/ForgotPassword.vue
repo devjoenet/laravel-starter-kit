@@ -3,7 +3,6 @@
   import TextLink from "@/components/TextLink.vue";
   import { Button } from "@/components/ui/button";
   import { Input } from "@/components/ui/input";
-  import { Label } from "@/components/ui/label";
   import AuthLayout from "@/layouts/AuthLayout.vue";
   import { Head, useForm } from "@inertiajs/vue3";
   import { LoaderCircle } from "lucide-vue-next";
@@ -32,8 +31,8 @@
     <div class="space-y-6">
       <form @submit.prevent="submit">
         <div class="grid gap-2">
-          <Label for="email">Email address</Label>
           <Input
+            label="Email"
             id="email"
             type="email"
             name="email"
