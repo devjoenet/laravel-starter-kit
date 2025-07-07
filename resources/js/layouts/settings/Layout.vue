@@ -35,7 +35,7 @@
           <Button
             v-for="item in sidebarNavItems"
             :key="item.href"
-            variant="ghost"
+            variant="outlined"
             :class="['w-full justify-start', { 'bg-muted': currentPath === item.href }]"
             as-child>
             <Link :href="item.href">
