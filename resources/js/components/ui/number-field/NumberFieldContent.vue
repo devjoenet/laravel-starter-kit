@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
-import { cn } from "@/lib/utils";
+  import type { HTMLAttributes } from "vue";
+  import { cn } from "@/lib/utils";
 
-const props = defineProps<{
-  class?: HTMLAttributes["class"];
-}>();
+  const props = defineProps<{
+    class?: HTMLAttributes["class"];
+  }>();
 </script>
 
 <template>
@@ -14,8 +14,7 @@ const props = defineProps<{
         'relative [&>[data-slot=input]]:has-[[data-slot=decrement]]:pl-5 [&>[data-slot=input]]:has-[[data-slot=increment]]:pr-5',
         props.class,
       )
-    "
-  >
+    ">
     <slot />
   </div>
 </template>

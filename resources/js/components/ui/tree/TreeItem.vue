@@ -1,11 +1,9 @@
 <script setup lang="ts" generic="T">
-import { cn } from "@/lib/utils";
-import { TreeItem, type TreeItemProps } from "reka-ui";
-import type { HTMLAttributes } from "vue";
+  import { cn } from "@/lib/utils";
+  import { TreeItem, type TreeItemProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
-const props = defineProps<
-  TreeItemProps<T> & { hasChildren?: boolean; class?: HTMLAttributes["class"] }
->();
+  const props = defineProps<TreeItemProps<T> & { hasChildren?: boolean; class?: HTMLAttributes["class"] }>();
 </script>
 
 <template>
@@ -21,8 +19,7 @@ const props = defineProps<
     }"
     :data-folder="props.hasChildren ?? false"
     v-bind="props"
-    v-slot="slotProps"
-  >
+    v-slot="slotProps">
     <slot v-bind="slotProps" />
   </TreeItem>
 </template>

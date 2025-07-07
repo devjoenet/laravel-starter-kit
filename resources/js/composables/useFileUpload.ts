@@ -127,11 +127,7 @@ export const useFileUpload = (options: FileUploadOptions = {}) => {
   const clearFiles = () => {
     // Clean up object URLs
     files.value.forEach((file) => {
-      if (
-        file.preview &&
-        file.file instanceof File &&
-        file.file.type.startsWith("image/")
-      ) {
+      if (file.preview && file.file instanceof File && file.file.type.startsWith("image/")) {
         URL.revokeObjectURL(file.preview);
       }
     });
@@ -160,11 +156,7 @@ export const useFileUpload = (options: FileUploadOptions = {}) => {
     }
 
     // Check if adding these files would exceed maxFiles (only in multiple mode)
-    if (
-      multiple &&
-      maxFiles !== Infinity &&
-      files.value.length + newFilesArray.length > maxFiles
-    ) {
+    if (multiple && maxFiles !== Infinity && files.value.length + newFilesArray.length > maxFiles) {
       newErrors.push(`You can only upload a maximum of ${maxFiles} files.`);
       errors.value = newErrors;
       return;
@@ -175,9 +167,7 @@ export const useFileUpload = (options: FileUploadOptions = {}) => {
     newFilesArray.forEach((file) => {
       // Check for duplicates
       const isDuplicate = files.value.some(
-        (existingFile) =>
-          existingFile.file.name === file.name &&
-          existingFile.file.size === file.size,
+        (existingFile) => existingFile.file.name === file.name && existingFile.file.size === file.size,
       );
 
       // Skip duplicate files silently
@@ -255,11 +245,7 @@ export const useFileUpload = (options: FileUploadOptions = {}) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (
-      e.currentTarget &&
-      e.relatedTarget &&
-      (e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)
-    ) {
+    if (e.currentTarget && e.relatedTarget && (e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)) {
       return;
     }
 
@@ -356,7 +342,5 @@ export const formatBytes = (bytes: number, decimals = 2): string => {
 
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return (
-    Number.parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + (sizes[i] || "")
-  );
+  return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + (sizes[i] || "");
 };

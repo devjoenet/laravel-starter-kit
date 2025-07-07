@@ -1,39 +1,35 @@
 <script setup lang="ts">
-import type { Column } from "@tanstack/vue-table";
-import type { AcceptableValue } from "reka-ui";
+  import type { Column } from "@tanstack/vue-table";
+  import type { AcceptableValue } from "reka-ui";
 
-interface ColumnMeta {
-  filterVariant?: "text" | "range" | "select";
-}
+  interface ColumnMeta {
+    filterVariant?: "text" | "range" | "select";
+  }
 
-const props = defineProps<{
-  column: Column<any, unknown>;
-}>();
+  const props = defineProps<{
+    column: Column<any, unknown>;
+  }>();
 
-const id = useId();
-const columnFilterValue = computed(() => props.column.getFilterValue());
-const filterVariant = computed(
-  () => (props.column.columnDef.meta as ColumnMeta | undefined)?.filterVariant,
-);
-const columnHeader = computed(() =>
-  typeof props.column.columnDef.header === "string"
-    ? props.column.columnDef.header
-    : "",
-);
+  const id = useId();
+  const columnFilterValue = computed(() => props.column.getFilterValue());
+  const filterVariant = computed(() => (props.column.columnDef.meta as ColumnMeta | undefined)?.filterVariant);
+  const columnHeader = computed(() =>
+    typeof props.column.columnDef.header === "string" ? props.column.columnDef.header : "",
+  );
 
-const sortedUniqueValues = computed(() => {
-  if (filterVariant.value === "range") return [];
+  const sortedUniqueValues = computed(() => {
+    if (filterVariant.value === "range") return [];
 
-  const values = Array.from(props.column.getFacetedUniqueValues().keys());
-  const flattenedValues = values.reduce((acc: string[], curr) => {
-    if (Array.isArray(curr)) {
-      return [...acc, ...curr];
-    }
-    return [...acc, curr];
-  }, []);
+    const values = Array.from(props.column.getFacetedUniqueValues().keys());
+    const flattenedValues = values.reduce((acc: string[], curr) => {
+      if (Array.isArray(curr)) {
+        return [...acc, ...curr];
+      }
+      return [...acc, curr];
+    }, []);
 
-  return Array.from(new Set(flattenedValues)).sort();
-});
+    return Array.from(new Set(flattenedValues)).sort();
+  });
 </script>
 
 <template>
@@ -47,30 +43,22 @@ const sortedUniqueValues = computed(() => {
           :model-value="(columnFilterValue as [number, number])?.[0] ?? ''"
           @update:model-value="
             (value: string | number) =>
-              column.setFilterValue((old: [number, number]) => [
-                value ? Number(value) : undefined,
-                old?.[1],
-              ])
+              column.setFilterValue((old: [number, number]) => [value ? Number(value) : undefined, old?.[1]])
           "
           placeholder="Min"
           type="number"
-          :aria-label="`${columnHeader} min`"
-        />
+          :aria-label="`${columnHeader} min`" />
         <Input
           :id="`${id}-range-2`"
           class="-ms-px flex-1 rounded-s-none [-moz-appearance:_textfield] focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
           :model-value="(columnFilterValue as [number, number])?.[1] ?? ''"
           @update:model-value="
             (value: string | number) =>
-              column.setFilterValue((old: [number, number]) => [
-                old?.[0],
-                value ? Number(value) : undefined,
-              ])
+              column.setFilterValue((old: [number, number]) => [old?.[0], value ? Number(value) : undefined])
           "
           placeholder="Max"
           type="number"
-          :aria-label="`${columnHeader} max`"
-        />
+          :aria-label="`${columnHeader} max`" />
       </div>
     </template>
 
@@ -82,19 +70,14 @@ const sortedUniqueValues = computed(() => {
           (value: AcceptableValue) => {
             column.setFilterValue(value === 'all' ? undefined : value);
           }
-        "
-      >
+        ">
         <SelectTrigger :id="`${id}-select`">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup :label="columnHeader">
             <SelectItem value="all">All</SelectItem>
-            <SelectItem
-              v-for="value in sortedUniqueValues"
-              :key="String(value)"
-              :value="String(value)"
-            >
+            <SelectItem v-for="value in sortedUniqueValues" :key="String(value)" :value="String(value)">
               {{ String(value) }}
             </SelectItem>
           </SelectGroup>
@@ -109,15 +92,11 @@ const sortedUniqueValues = computed(() => {
           :id="`${id}-input`"
           class="peer ps-9"
           :model-value="(columnFilterValue as string) ?? ''"
-          @update:model-value="
-            (value: string | number) => column.setFilterValue(value)
-          "
+          @update:model-value="(value: string | number) => column.setFilterValue(value)"
           :placeholder="`Search ${columnHeader.toLowerCase()}`"
-          type="text"
-        />
+          type="text" />
         <div
-          class="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50"
-        >
+          class="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
           <Icon name="lucide:search" class="size-4" />
         </div>
       </div>

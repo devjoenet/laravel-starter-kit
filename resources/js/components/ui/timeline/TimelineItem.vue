@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
-import { inject } from "vue";
+  import { cn } from "@/lib/utils";
+  import { inject } from "vue";
 
-interface TimelineContextValue {
-  activeStep: number;
-  setActiveStep: (step: number) => void;
-}
+  interface TimelineContextValue {
+    activeStep: number;
+    setActiveStep: (step: number) => void;
+  }
 
-const props = defineProps<{
-  step: number;
-  class?: string;
-}>();
+  const props = defineProps<{
+    step: number;
+    class?: string;
+  }>();
 
-const { activeStep } = inject<TimelineContextValue>("timeline")!;
+  const { activeStep } = inject<TimelineContextValue>("timeline")!;
 </script>
 
 <template>
@@ -24,8 +24,7 @@ const { activeStep } = inject<TimelineContextValue>("timeline")!;
         props.class,
       )
     "
-    :data-completed="step <= activeStep || undefined"
-  >
+    :data-completed="step <= activeStep || undefined">
     <slot />
   </div>
 </template>

@@ -1,17 +1,15 @@
 <script lang="ts" setup>
-import type { DialogContentEmits, DialogContentProps } from "reka-ui";
-import type { HtmlHTMLAttributes } from "vue";
-import { cn } from "@/lib/utils";
-import { useForwardPropsEmits } from "reka-ui";
-import { DrawerContent, DrawerPortal } from "vaul-vue";
-import DrawerOverlay from "./DrawerOverlay.vue";
+  import type { DialogContentEmits, DialogContentProps } from "reka-ui";
+  import type { HtmlHTMLAttributes } from "vue";
+  import { cn } from "@/lib/utils";
+  import { useForwardPropsEmits } from "reka-ui";
+  import { DrawerContent, DrawerPortal } from "vaul-vue";
+  import DrawerOverlay from "./DrawerOverlay.vue";
 
-const props = defineProps<
-  DialogContentProps & { class?: HtmlHTMLAttributes["class"] }
->();
-const emits = defineEmits<DialogContentEmits>();
+  const props = defineProps<DialogContentProps & { class?: HtmlHTMLAttributes["class"] }>();
+  const emits = defineEmits<DialogContentEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits);
+  const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
@@ -29,11 +27,9 @@ const forwarded = useForwardPropsEmits(props, emits);
           `data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:sm:max-w-sm`,
           props.class,
         )
-      "
-    >
+      ">
       <div
-        class="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block"
-      />
+        class="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
       <slot />
     </DrawerContent>
   </DrawerPortal>

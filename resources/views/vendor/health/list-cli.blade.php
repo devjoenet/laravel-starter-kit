@@ -1,9 +1,9 @@
 <div class="mx-2 my-1">
-    @if(count($checkResults?->storedCheckResults ?? []))
-        <div class="w-full max-w-120 mb-1 py-1 text-white bg-blue-800">
-            <span class="px-2 text-left w-1/2">Laravel Health Check Results</span>
-            <span class="px-2 text-right w-1/2">
-               Last ran all the checks
+    @if (count($checkResults?->storedCheckResults ?? []))
+        <div class="max-w-120 mb-1 w-full bg-blue-800 py-1 text-white">
+            <span class="w-1/2 px-2 text-left">Laravel Health Check Results</span>
+            <span class="w-1/2 px-2 text-right">
+                Last ran all the checks
                 @if ($lastRanAt->diffInMinutes() < 1)
                     just now
                 @else
@@ -14,7 +14,7 @@
         @foreach ($checkResults->storedCheckResults as $result)
             <div class="space-x-1">
                 <span class="w-10">
-                    <b class="uppercase {{ $color($result->status) }}">
+                    <b class="{{ $color($result->status) }} uppercase">
                         {{ ucfirst($result->status) }}
                     </b>
                 </span>
@@ -23,9 +23,9 @@
                 <span class="{{ $color($result->status) }}"> {{ $result->shortSummary }}</span>
             </div>
             @if ($result->notificationMessage)
-            <div class="ml-11 text-gray">
-                ⇂ {{ $result->notificationMessage }}
-            </div>
+                <div class="text-gray ml-11">
+                    ⇂ {{ $result->notificationMessage }}
+                </div>
             @endif
         @endforeach
     @else

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
+  import { cn } from "@/lib/utils";
 
-defineProps<{
-  class?: string;
-}>();
+  defineProps<{
+    class?: string;
+  }>();
 </script>
 
 <template>
@@ -14,8 +14,7 @@ defineProps<{
         'text-muted-foreground mb-1 block text-xs font-medium group-data-[orientation=vertical]/timeline:max-sm:h-4',
         $props.class,
       )
-    "
-  >
+    ">
     <slot />
   </time>
 </template>

@@ -1,22 +1,16 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
-import {
-  DateRangePickerInput,
-  type DateRangePickerInputProps,
-  useForwardProps,
-} from "reka-ui";
-import { type HTMLAttributes, computed } from "vue";
+  import { cn } from "@/lib/utils";
+  import { DateRangePickerInput, type DateRangePickerInputProps, useForwardProps } from "reka-ui";
+  import { type HTMLAttributes, computed } from "vue";
 
-const props = defineProps<
-  DateRangePickerInputProps & { class?: HTMLAttributes["class"] }
->();
+  const props = defineProps<DateRangePickerInputProps & { class?: HTMLAttributes["class"] }>();
 
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
-  return delegated;
-});
+  const delegatedProps = computed(() => {
+    const { class: _, ...delegated } = props;
+    return delegated;
+  });
 
-const forwardedProps = useForwardProps(delegatedProps);
+  const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
@@ -29,8 +23,7 @@ const forwardedProps = useForwardProps(delegatedProps);
         props.class,
       )
     "
-    v-bind="forwardedProps"
-  >
+    v-bind="forwardedProps">
     <slot />
   </DateRangePickerInput>
 </template>

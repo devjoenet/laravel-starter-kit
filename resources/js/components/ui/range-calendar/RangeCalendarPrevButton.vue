@@ -1,25 +1,19 @@
 <script lang="ts" setup>
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/default/ui/button";
-import { ChevronLeft } from "lucide-vue-next";
-import {
-  RangeCalendarPrev,
-  type RangeCalendarPrevProps,
-  useForwardProps,
-} from "reka-ui";
-import { computed, type HTMLAttributes } from "vue";
+  import { cn } from "@/lib/utils";
+  import { buttonVariants } from "@/registry/default/ui/button";
+  import { ChevronLeft } from "lucide-vue-next";
+  import { RangeCalendarPrev, type RangeCalendarPrevProps, useForwardProps } from "reka-ui";
+  import { computed, type HTMLAttributes } from "vue";
 
-const props = defineProps<
-  RangeCalendarPrevProps & { class?: HTMLAttributes["class"] }
->();
+  const props = defineProps<RangeCalendarPrevProps & { class?: HTMLAttributes["class"] }>();
 
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const delegatedProps = computed(() => {
+    const { class: _, ...delegated } = props;
 
-  return delegated;
-});
+    return delegated;
+  });
 
-const forwardedProps = useForwardProps(delegatedProps);
+  const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
@@ -33,8 +27,7 @@ const forwardedProps = useForwardProps(delegatedProps);
         props.class,
       )
     "
-    v-bind="forwardedProps"
-  >
+    v-bind="forwardedProps">
     <slot>
       <ChevronLeft class="size-4" />
     </slot>

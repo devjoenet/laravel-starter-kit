@@ -1,23 +1,17 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
-import {
-  TimeFieldInput,
-  useForwardProps,
-  type TimeFieldInputProps,
-} from "reka-ui";
-import type { HTMLAttributes } from "vue";
+  import { cn } from "@/lib/utils";
+  import { TimeFieldInput, useForwardProps, type TimeFieldInputProps } from "reka-ui";
+  import type { HTMLAttributes } from "vue";
 
-const props = defineProps<
-  TimeFieldInputProps & { class?: HTMLAttributes["class"] }
->();
+  const props = defineProps<TimeFieldInputProps & { class?: HTMLAttributes["class"] }>();
 
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const delegatedProps = computed(() => {
+    const { class: _, ...delegated } = props;
 
-  return delegated;
-});
+    return delegated;
+  });
 
-const forwarded = useForwardProps(delegatedProps);
+  const forwarded = useForwardProps(delegatedProps);
 </script>
 <template>
   <TimeFieldInput
@@ -29,8 +23,7 @@ const forwarded = useForwardProps(delegatedProps);
           : 'data-[placeholder]:text-muted-foreground/70 focus:bg-muted rounded p-0.5 text-sm focus:shadow-black focus:outline-none',
         props.class,
       )
-    "
-  >
+    ">
     <slot />
   </TimeFieldInput>
 </template>

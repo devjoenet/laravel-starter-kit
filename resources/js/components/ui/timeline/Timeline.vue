@@ -1,41 +1,41 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
-import { computed, provide, ref } from "vue";
+  import { cn } from "@/lib/utils";
+  import { computed, provide, ref } from "vue";
 
-interface TimelineContextValue {
-  activeStep: number;
-  setActiveStep: (step: number) => void;
-}
-
-const props = withDefaults(
-  defineProps<{
-    defaultValue?: number;
-    value?: number;
-    onValueChange?: (value: number) => void;
-    orientation?: "horizontal" | "vertical";
-    class?: string;
-  }>(),
-  {
-    defaultValue: 1,
-    orientation: "vertical",
-  },
-);
-
-const activeStep = ref(props.defaultValue);
-
-const setActiveStep = (step: number) => {
-  if (props.value === undefined) {
-    activeStep.value = step;
+  interface TimelineContextValue {
+    activeStep: number;
+    setActiveStep: (step: number) => void;
   }
-  props.onValueChange?.(step);
-};
 
-const currentStep = computed(() => props.value ?? activeStep.value);
+  const props = withDefaults(
+    defineProps<{
+      defaultValue?: number;
+      value?: number;
+      onValueChange?: (value: number) => void;
+      orientation?: "horizontal" | "vertical";
+      class?: string;
+    }>(),
+    {
+      defaultValue: 1,
+      orientation: "vertical",
+    },
+  );
 
-provide<TimelineContextValue>("timeline", {
-  activeStep: currentStep.value,
-  setActiveStep,
-});
+  const activeStep = ref(props.defaultValue);
+
+  const setActiveStep = (step: number) => {
+    if (props.value === undefined) {
+      activeStep.value = step;
+    }
+    props.onValueChange?.(step);
+  };
+
+  const currentStep = computed(() => props.value ?? activeStep.value);
+
+  provide<TimelineContextValue>("timeline", {
+    activeStep: currentStep.value,
+    setActiveStep,
+  });
 </script>
 
 <template>
@@ -47,8 +47,7 @@ provide<TimelineContextValue>("timeline", {
         props.class,
       )
     "
-    :data-orientation="orientation"
-  >
+    :data-orientation="orientation">
     <slot />
   </div>
 </template>

@@ -1,24 +1,18 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
-import { LucideCalendar } from "lucide-vue-next";
-import {
-  DateRangePickerTrigger,
-  type DateRangePickerTriggerProps,
-  useForwardProps,
-} from "reka-ui";
-import { type HTMLAttributes, computed } from "vue";
+  import { cn } from "@/lib/utils";
+  import { LucideCalendar } from "lucide-vue-next";
+  import { DateRangePickerTrigger, type DateRangePickerTriggerProps, useForwardProps } from "reka-ui";
+  import { type HTMLAttributes, computed } from "vue";
 
-const props = defineProps<
-  DateRangePickerTriggerProps & { class?: HTMLAttributes["class"] }
->();
+  const props = defineProps<DateRangePickerTriggerProps & { class?: HTMLAttributes["class"] }>();
 
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const delegatedProps = computed(() => {
+    const { class: _, ...delegated } = props;
 
-  return delegated;
-});
+    return delegated;
+  });
 
-const forwardedProps = useForwardProps(delegatedProps);
+  const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
@@ -29,8 +23,7 @@ const forwardedProps = useForwardProps(delegatedProps);
         props.class,
       )
     "
-    v-bind="forwardedProps"
-  >
+    v-bind="forwardedProps">
     <slot>
       <LucideCalendar :size="16" />
     </slot>

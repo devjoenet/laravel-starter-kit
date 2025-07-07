@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
-import { PaginationPrev, type PaginationPrevProps } from "reka-ui";
-import { computed, type HTMLAttributes } from "vue";
+  import { cn } from "@/lib/utils";
+  import { PaginationPrev, type PaginationPrevProps } from "reka-ui";
+  import { computed, type HTMLAttributes } from "vue";
 
-const props = withDefaults(
-  defineProps<PaginationPrevProps & { class?: HTMLAttributes["class"] }>(),
-  {
+  const props = withDefaults(defineProps<PaginationPrevProps & { class?: HTMLAttributes["class"] }>(), {
     asChild: true,
-  },
-);
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  });
+  const delegatedProps = computed(() => {
+    const { class: _, ...delegated } = props;
 
-  return delegated;
-});
+    return delegated;
+  });
 </script>
 
 <template>
