@@ -1,3 +1,5 @@
+import { ref, computed } from "vue";
+
 interface UseSliderWithInputProps {
   minValue?: number;
   maxValue?: number;

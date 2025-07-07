@@ -1,5 +1,7 @@
+import { ref } from "vue";
+
 export const useCommandPalette = () => {
-  const open = useState("commandPaletteOpen", () => false);
+  const open = ref(false);
   const searchQuery = ref("");
 
   const openCommandPalette = () => {
