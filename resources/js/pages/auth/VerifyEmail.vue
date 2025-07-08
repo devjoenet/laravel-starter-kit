@@ -1,25 +1,19 @@
 <script setup lang="ts">
   import TextLink from "@/components/TextLink.vue";
   import { Button } from "@/components/ui/button";
-  import AuthLayout from "@/layouts/AuthLayout.vue";
+  import AuthBase from "@/layouts/auth/AuthCardLayout.vue";
   import { Head, useForm } from "@inertiajs/vue3";
   import { LoaderCircle } from "lucide-vue-next";
 
-  defineProps<{
-    status?: string;
-  }>();
+  defineProps<{ status?: string }>();
 
   const form = useForm({});
 
-  const submit = () => {
-    form.post(route("verification.send"));
-  };
+  const submit = () => form.post(route("verification.send"));
 </script>
 
 <template>
-  <AuthLayout
-    title="Verify email"
-    description="Please verify your email address by clicking on the link we just emailed to you.">
+  <AuthBase title="Verify email" description="Please verify your email address by clicking on the link we just emailed to you.">
     <Head title="Email verification" />
 
     <div v-if="status === 'verification-link-sent'" class="mb-4 text-center text-sm font-medium text-green-600">
@@ -34,5 +28,5 @@
 
       <TextLink :href="route('logout')" method="post" as="button" class="mx-auto block text-sm"> Log out </TextLink>
     </form>
-  </AuthLayout>
+  </AuthBase>
 </template>

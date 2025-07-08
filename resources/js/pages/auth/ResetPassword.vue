@@ -2,7 +2,7 @@
   import InputError from "@/components/InputError.vue";
   import { Button } from "@/components/ui/button";
   import { Input } from "@/components/ui/input";
-  import AuthLayout from "@/layouts/AuthLayout.vue";
+  import AuthBase from "@/layouts/auth/AuthCardLayout.vue";
   import { Head, useForm } from "@inertiajs/vue3";
   import { LoaderCircle } from "lucide-vue-next";
 
@@ -20,44 +20,22 @@
     password_confirmation: "",
   });
 
-  const submit = () => {
-    form.post(route("password.store"), {
-      onFinish: () => {
-        form.reset("password", "password_confirmation");
-      },
-    });
-  };
+  const submit = () => form.post(route("password.store"), { onFinish: () => form.reset("password", "password_confirmation") });
 </script>
 
 <template>
-  <AuthLayout title="Reset password" description="Please enter your new password below">
+  <AuthBase title="Reset password" description="Please enter your new password below">
     <Head title="Reset password" />
 
     <form @submit.prevent="submit">
       <div class="grid gap-6">
         <div class="grid gap-2">
-          <Input
-            label="Email"
-            id="email"
-            type="email"
-            name="email"
-            autocomplete="email"
-            v-model="form.email"
-            class="mt-1 block w-full"
-            readonly="true" />
+          <Input label="Email" id="email" type="email" name="email" autocomplete="email" v-model="form.email" class="mt-1 block w-full" readonly="true" />
           <InputError :message="form.errors.email" class="mt-2" />
         </div>
 
         <div class="grid gap-2">
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            name="password"
-            autocomplete="new-password"
-            v-model="form.password"
-            class="mt-1 block w-full"
-            autofocus="true" />
+          <Input label="Password" id="password" type="password" name="password" autocomplete="new-password" v-model="form.password" class="mt-1 block w-full" autofocus="true" />
           <InputError :message="form.errors.password" />
         </div>
 
@@ -69,7 +47,8 @@
             name="password_confirmation"
             autocomplete="new-password"
             v-model="form.password_confirmation"
-            class="mt-1 block w-full" />
+            class="mt-1 block w-full"
+          />
           <InputError :message="form.errors.password_confirmation" />
         </div>
 
@@ -79,5 +58,5 @@
         </Button>
       </div>
     </form>
-  </AuthLayout>
+  </AuthBase>
 </template>

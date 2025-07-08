@@ -14,11 +14,7 @@
     password_confirmation: "",
   });
 
-  const submit = () => {
-    form.post(route("register"), {
-      onFinish: () => form.reset("password", "password_confirmation"),
-    });
-  };
+  const submit = () => form.post(route("register"), { onFinish: () => form.reset("password", "password_confirmation") });
 </script>
 
 <template>
@@ -28,42 +24,17 @@
     <form @submit.prevent="submit" class="flex flex-col gap-6">
       <div class="grid gap-6">
         <div class="grid gap-2">
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            :required="true"
-            :autofocus="true"
-            :tabindex="1"
-            autocomplete="name"
-            v-model="form.name"
-            label="Full Name" />
+          <Input id="name" name="name" type="text" :required="true" :autofocus="true" :tabindex="1" autocomplete="name" v-model="form.name" label="Full Name" />
           <InputError :message="form.errors.name" />
         </div>
 
         <div class="grid gap-2">
-          <Input
-            id="email"
-            name="name"
-            type="email"
-            required="true"
-            :tabindex="2"
-            autocomplete="email"
-            v-model="form.email"
-            label="Email Address" />
+          <Input id="email" name="name" type="email" required="true" :tabindex="2" autocomplete="email" v-model="form.email" label="Email Address" />
           <InputError :message="form.errors.email" />
         </div>
 
         <div class="grid gap-2">
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            required="true"
-            :tabindex="3"
-            autocomplete="new-password"
-            v-model="form.password"
-            label="Password" />
+          <Input id="password" name="password" type="password" required="true" :tabindex="3" autocomplete="new-password" v-model="form.password" label="Password" />
           <InputError :message="form.errors.password" />
         </div>
 
@@ -76,7 +47,8 @@
             :tabindex="4"
             autocomplete="new-password"
             v-model="form.password_confirmation"
-            label="Confirm password" />
+            label="Confirm password"
+          />
           <InputError :message="form.errors.password_confirmation" />
         </div>
 
