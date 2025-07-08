@@ -53,5 +53,4 @@ export const buttonVariants = cva(
   },
 );
 
-// --- Export the type for use in the component ---
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
