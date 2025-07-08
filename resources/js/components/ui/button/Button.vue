@@ -11,11 +11,10 @@
     class?: HTMLAttributes["class"];
   }
 
+  const delegatedProps = computed(() => reactiveOmit(props, ["variant", "size", "class"]));
   const props = withDefaults(defineProps<Props>(), {
     as: "button",
   });
-
-  const delegatedProps = computed(() => reactiveOmit(props, ["variant", "size", "class"]));
 </script>
 
 <template>

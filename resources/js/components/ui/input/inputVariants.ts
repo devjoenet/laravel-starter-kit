@@ -1,7 +1,6 @@
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 
 export const inputVariants = cva(
-  // Base classes for the input element
   [
     "peer block h-14 w-full text-base text-on-surface outline-none transition-colors duration-200 ease-in-out",
     "hover:border-on-surface",
@@ -19,11 +18,7 @@ export const inputVariants = cva(
           "disabled:bg-on-surface/4",
           "aria-[invalid=true]:pt-[23px]",
         ],
-        outlined: [
-          "rounded-lg border border-outline bg-transparent px-4 py-4",
-          "focus:py-[15px]",
-          "aria-[invalid=true]:py-[15px]",
-        ],
+        outlined: ["rounded-lg border border-outline bg-transparent px-4 py-4", "focus:py-[15px]", "aria-[invalid=true]:py-[15px]"],
       },
     },
     defaultVariants: {
@@ -33,7 +28,6 @@ export const inputVariants = cva(
 );
 
 export const labelVariants = cva(
-  // Base classes for the label element
   [
     "pointer-events-none absolute left-4 origin-top-left text-base text-on-surface-variant transition-all duration-200 ease-in-out",
     "group-focus-within:scale-75 group-focus-within:text-primary",
@@ -44,11 +38,7 @@ export const labelVariants = cva(
   {
     variants: {
       variant: {
-        filled: [
-          "top-4",
-          "group-focus-within:top-2 group-focus-within:-translate-y-1",
-          "peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:-translate-y-1",
-        ],
+        filled: ["top-4", "group-focus-within:top-2 group-focus-within:-translate-y-1", "peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:-translate-y-1"],
         outlined: [
           "top-1/2 -translate-y-1/2",
           "group-focus-within:top-0 group-focus-within:bg-background group-focus-within:px-1",
@@ -61,3 +51,6 @@ export const labelVariants = cva(
     },
   },
 );
+
+export type LabelVariants = VariantProps<typeof labelVariants>;
+export type InputVariants = VariantProps<typeof inputVariants>;

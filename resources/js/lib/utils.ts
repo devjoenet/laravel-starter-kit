@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
-export function inputId(): string {
-  return `input-${Math.random().toString(36).substring(2, 9)}`;
+export function generateId(prefix: string | null = null): string {
+  prefix = prefix === null ? "id" : prefix;
+  return `${prefix}-${Math.random().toString(36).substring(2, 9)}`;
 }

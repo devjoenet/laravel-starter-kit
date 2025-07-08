@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { computed } from "vue";
+  import { generateId } from "@/lib/utils";
 
-  const patternId = computed(() => `pattern-${Math.random().toString(36).substring(2, 9)}`);
+  const patternId = computed(() => generateId("patern"));
 </script>
 
 <template>

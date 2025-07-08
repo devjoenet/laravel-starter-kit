@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { cn } from "@/lib/utils";
+  import { cn, generateId } from "@/lib/utils";
   import { useVModel } from "@vueuse/core";
   import { type HTMLAttributes, InputHTMLAttributes, InputTypeHTMLAttribute } from "vue";
-  import { inputVariants, labelVariants } from "./inputVariants";
+  import { inputVariants, labelVariants } from ".";
 
   const props = withDefaults(
     defineProps<{
@@ -31,16 +31,11 @@
     },
   );
 
-  const emits = defineEmits<{
-    (e: "update:modelValue", payload: string | number): void;
-  }>();
+  const emits = defineEmits<{ (e: "update:modelValue", payload: string | number): void }>();
 
-  const modelValue = useVModel(props, "modelValue", emits, {
-    passive: true,
-    defaultValue: props.defaultValue,
-  });
+  const modelValue = useVModel(props, "modelValue", emits, { passive: true, defaultValue: props.defaultValue });
 
-  const inputId = props.id || `input-${Math.random().toString(36).substring(2, 9)}`;
+  const inputId = props.id || generateId("input");
 </script>
 
 <template>
@@ -57,7 +52,8 @@
       :autofocus="autofocus"
       :autocomplete="autocomplete"
       :tabindex="tabindex"
-      :class="cn(inputVariants({ variant }))" />
+      :class="cn(inputVariants({ variant }))"
+    />
     <label :for="inputId" :class="cn(labelVariants({ variant }))">
       {{ label }}
     </label>

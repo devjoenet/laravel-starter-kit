@@ -1,6 +1,6 @@
 {
-  "printWidth": 120,
-  "bracketSameLine": true,
+  "printWidth": 180,
+  "bracketSameLine": false,
   "singleAttributePerLine": false,
   "vueIndentScriptAndStyle": true,
   "plugins": ["@shufo/prettier-plugin-blade"],
