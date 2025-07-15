@@ -1,24 +1,16 @@
 <script setup lang="ts">
   import { cn } from "@/lib/utils";
-  import { Primitive, type PrimitiveProps } from "reka-ui";
-  import { computed, type HTMLAttributes } from "vue";
+  import { Primitive } from "reka-ui";
+  import { computed } from "vue";
   import { reactiveOmit } from "@vueuse/core";
-  import { type ButtonVariants, Variants } from ".";
+  import { type ButtonProps, variants } from ".";
 
-  interface Props extends PrimitiveProps {
-    variant?: ButtonVariants["variant"];
-    size?: ButtonVariants["size"];
-    class?: HTMLAttributes["class"];
-  }
-
+  const props = withDefaults(defineProps<ButtonProps>(), { as: "button" });
   const delegatedProps = computed(() => reactiveOmit(props, ["variant", "size", "class"]));
-  const props = withDefaults(defineProps<Props>(), {
-    as: "button",
-  });
 </script>
 
 <template>
-  <Primitive data-slot="button" v-bind="delegatedProps" :class="cn(Variants({ variant, size }), props.class)">
+  <Primitive data-slot="button" v-bind="delegatedProps" :class="cn(variants({ variant, size }), props.class)">
     <slot />
   </Primitive>
 </template>

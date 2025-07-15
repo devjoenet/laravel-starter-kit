@@ -1,24 +1,18 @@
 <script setup lang="ts">
+  import { type HTMLAttributes } from "vue";
+  import { AccordionContent, type AccordionContentProps } from "reka-ui";
+  import { reactiveOmit } from "@vueuse/core";
   import { cn } from "@/lib/utils";
-  import { AccordionItem, type AccordionItemProps, useForwardProps } from "reka-ui";
-  import { computed, type HTMLAttributes } from "vue";
 
-  const props = defineProps<AccordionItemProps & { class?: HTMLAttributes["class"] }>();
+  const props = defineProps<AccordionContentProps & { class?: HTMLAttributes["class"] }>();
 
-  const delegatedProps = computed(() => {
-    const { class: _, ...delegated } = props;
-
-    return delegated;
-  });
-
-  const forwardedProps = useForwardProps(delegatedProps);
+  const delegatedProps = reactiveOmit(props, "class");
 </script>
 
 <template>
-  <AccordionItem
-    data-slot="accordion-item"
-    v-bind="forwardedProps"
-    :class="cn('border-b last:border-b-0', props.class)">
-    <slot />
-  </AccordionItem>
+  <AccordionContent v-bind="delegatedProps" class="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+    <div :class="cn('pb-4 pt-0 text-body-medium text-on-surface-variant', props.class)">
+      <slot />
+    </div>
+  </AccordionContent>
 </template>
