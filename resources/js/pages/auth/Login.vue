@@ -8,7 +8,10 @@
   import { Head, useForm } from "@inertiajs/vue3";
   import { LoaderCircle } from "lucide-vue-next";
 
-  defineProps<{ status?: string; canResetPassword: boolean }>();
+  defineProps<{
+    status?: string;
+    canResetPassword: boolean;
+  }>();
 
   const form = useForm({
     email: "",
@@ -16,7 +19,11 @@
     remember: false,
   });
 
-  const submit = () => form.post(route("login"), { onFinish: () => form.reset("password") });
+  const submit = () => {
+    form.post(route("login"), {
+      onFinish: () => form.reset("password"),
+    });
+  };
 </script>
 
 <template>
@@ -30,15 +37,33 @@
     <form @submit.prevent="submit" class="flex flex-col gap-6">
       <div class="grid gap-6">
         <div class="grid gap-2">
-          <Input label="Email address" id="email" type="email" required="true" autofocus="true" :tabindex="1" autocomplete="email" v-model="form.email" />
+          <Input
+            label="Email address"
+            id="email"
+            type="email"
+            required="true"
+            autofocus="true"
+            :tabindex="1"
+            autocomplete="email"
+            v-model="form.email" />
           <InputError :message="form.errors.email" />
         </div>
 
         <div class="grid gap-2">
           <div class="flex items-center justify-between">
-            <TextLink v-if="canResetPassword" :href="route('password.request')" class="text-sm" :tabindex="5"> Forgot password? </TextLink>
+            <TextLink v-if="canResetPassword" :href="route('password.request')" class="text-sm" :tabindex="5">
+              Forgot password?
+            </TextLink>
           </div>
-          <Input label="Password" id="password" type="password" required="true" :tabindex="2" autocomplete="current-password" v-model="form.password" placeholder="Password" />
+          <Input
+            label="Password"
+            id="password"
+            type="password"
+            required="true"
+            :tabindex="2"
+            autocomplete="current-password"
+            v-model="form.password"
+            placeholder="Password" />
           <InputError :message="form.errors.password" />
         </div>
 

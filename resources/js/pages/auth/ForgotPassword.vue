@@ -3,18 +3,25 @@
   import TextLink from "@/components/TextLink.vue";
   import { Button } from "@/components/ui/button";
   import { Input } from "@/components/ui/input";
-  import AuthBase from "@/layouts/auth/AuthCardLayout.vue";
+  import AuthLayout from "@/layouts/AuthLayout.vue";
   import { Head, useForm } from "@inertiajs/vue3";
   import { LoaderCircle } from "lucide-vue-next";
 
-  defineProps<{ status?: string }>();
+  defineProps<{
+    status?: string;
+  }>();
 
-  const form = useForm({ email: "" });
-  const submit = () => form.post(route("password.email"));
+  const form = useForm({
+    email: "",
+  });
+
+  const submit = () => {
+    form.post(route("password.email"));
+  };
 </script>
 
 <template>
-  <AuthBase title="Forgot password" description="Enter your email to receive a password reset link">
+  <AuthLayout title="Forgot password" description="Enter your email to receive a password reset link">
     <Head title="Forgot password" />
 
     <div v-if="status" class="mb-4 text-center text-sm font-medium text-green-600">
@@ -24,7 +31,15 @@
     <div class="space-y-6">
       <form @submit.prevent="submit">
         <div class="grid gap-2">
-          <Input label="Email" id="email" type="email" name="email" autocomplete="off" v-model="form.email" autofocus placeholder="email@example.com" />
+          <Input
+            label="Email"
+            id="email"
+            type="email"
+            name="email"
+            autocomplete="off"
+            v-model="form.email"
+            autofocus
+            placeholder="email@example.com" />
           <InputError :message="form.errors.email" />
         </div>
 
@@ -41,5 +56,5 @@
         <TextLink :href="route('login')">log in</TextLink>
       </div>
     </div>
-  </AuthBase>
+  </AuthLayout>
 </template>
