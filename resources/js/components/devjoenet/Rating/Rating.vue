@@ -10,7 +10,9 @@
 
   const model = defineModel<number>();
 
-  const groupName = computed(() => props.name || `rating-group-${crypto.randomUUID()}`);
+  // A simple counter for unique IDs
+  let idCounter = 0;
+  const groupName = computed(() => props.name || `rating-group-${idCounter++}`);
 </script>
 
 <template>

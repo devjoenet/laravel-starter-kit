@@ -1,8 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@plugin "daisyui" {
+  themes:
+    light --winter,
+    dark --night;
+}
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+@source '../js/**/*.vue';
 
 @custom-variant dark (&:is(.dark *));
 

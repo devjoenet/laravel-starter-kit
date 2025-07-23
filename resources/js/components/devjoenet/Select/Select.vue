@@ -6,10 +6,12 @@
 
   const props = defineProps<SelectProps>();
   const model = defineModel<any>();
+
   const selectedLabel = ref("");
 
-  // A unique ID is needed to link the button to the popover
-  const popoverId = computed(() => `select-popover-${crypto.randomUUID()}`);
+  // A simple counter for unique IDs
+  let idCounter = 0;
+  const popoverId = computed(() => `select-popover-${idCounter++}`);
 
   function onSelect(value: any, label: string) {
     model.value = value;

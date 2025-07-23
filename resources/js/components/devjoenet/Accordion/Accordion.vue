@@ -7,8 +7,10 @@
     style: "arrow",
   });
 
+  // A simple counter for unique IDs
+  let idCounter = 0;
   // Provide a unique name for the radio group if none is passed
-  const accordionName = computed(() => props.name || `accordion-${crypto.randomUUID()}`);
+  const accordionName = computed(() => props.name || `accordion-${idCounter++}`);
 
   provide(AccordionContextKey, {
     name: accordionName,

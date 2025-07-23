@@ -11,6 +11,7 @@ export default defineConfigWithVueTs(
   {
     rules: {
       "vue/multi-word-component-names": "off",
+      "vue/script-setup-uses-vars": "error",
       "@typescript-eslint/no-explicit-any": "off",
     },
   },
