@@ -235,6 +235,12 @@ You can use https://daisyui.com/theme-generator/ to create your own theme
 
 ## daisyUI 5 components
 
+- If I ask for a base component, I am refering to Vue components that have their own directories located in `./resources/js/components/ui/`. These are Vue 3 SFC's with a single barrel file (`index.ts`) to handle exports.
+  - If the base component I asked for already exists in this location, I would only like to edit the existing files to use daisyUi 5, and my theme in `./resources/css/app.css`. You may also make refactoring suggestions that would make future coding easier. Split any complex components into multiple Vue components that are loaded by the main one.
+  - If the base component does not exist, please use these same guidelines to create the component in that location with as many Vue files as make sense for the request.
+- If I ask for a component (not a base component) The idea would be to use one or more base components to construct an app specific component. These would live in `./resources/js/components/`
+- Ask for clarification on any points you don't know for certian, or if you need more information on my part.
+
 ### accordion
 
 Accordion is used for showing and hiding content but only one item can stay open at a time
