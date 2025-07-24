@@ -1,33 +1,25 @@
-<script setup lang="ts">
-  import { ref } from "vue";
-  import { useMotion } from "@vueuse/motion";
-  import { badgeVariants } from "./variants";
-  import type { BadgeProps } from "./types";
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { badgeVariants } from './cva'
 
-  const props = defineProps<BadgeProps>();
+const props = defineProps<{
+  color?: 'neutral' | 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'
+  style?: 'solid' | 'outline' | 'dash' | 'soft' | 'ghost'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  class?: string
+}>()
 
-  const badgeRef = ref<HTMLElement>();
-
-  useMotion(badgeRef, {
-    initial: {
-      opacity: 0,
-      y: 5,
-    },
-    enter: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 50,
-        type: "spring",
-        stiffness: 300,
-        damping: 25,
-      },
-    },
-  });
+const classes = computed(() =>
+  badgeVariants({
+    color: props.color,
+    style: props.style,
+    size: props.size
+  }) + (props.class ? ` ${props.class}` : '')
+)
 </script>
 
 <template>
-  <span ref="badgeRef" :class="badgeVariants(props)">
+  <span :class="classes">
     <slot />
   </span>
 </template>

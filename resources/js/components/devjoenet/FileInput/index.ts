@@ -1,4 +1,1 @@
-import FileInput from "./FileInput.vue";
-
-export { FileInput };
-export * from "./types";
+export { default as FileInput } from './FileInput.vue'

@@ -1,30 +1,39 @@
-<script setup lang="ts">
-  import { ref } from "vue";
-  import { useMotion } from "@vueuse/motion";
-  import { cardVariants } from "./variants";
-  import type { CardProps } from "./types";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { cardVariants } from "./cva";
 
-  const props = defineProps<CardProps>();
-  const cardRef = ref<HTMLElement>();
+  const props = defineProps<{
+    style?: "none" | "bordered" | "dash";
+    side?: "vertical" | "horizontal";
+    imageFull?: boolean;
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    class?: string;
+  }>();
 
-  useMotion(cardRef, {
-    initial: { opacity: 0, y: 20, scale: 0.98 },
-    enter: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        delay: 100,
-        type: "spring",
-        stiffness: 250,
-        damping: 25,
-      },
-    },
-  });
+  const variantClass = computed(
+    () =>
+      cardVariants({
+        style: props.style,
+        side: props.side,
+        imageFull: props.imageFull,
+        size: props.size,
+      }) + (props.class ? ` ${props.class}` : ""),
+  );
 </script>
 
 <template>
-  <div ref="cardRef" :class="cardVariants(props)">
-    <slot />
+  <div :class="variantClass">
+    <slot name="image" />
+    <CardBody>
+      <template #default>
+        <CardHeader v-if="$slots.header">
+          <slot name="header" />
+        </CardHeader>
+        <slot />
+        <CardActions v-if="$slots.actions">
+          <slot name="actions" />
+        </CardActions>
+      </template>
+    </CardBody>
   </div>
 </template>

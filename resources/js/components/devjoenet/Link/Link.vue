@@ -1,16 +1,20 @@
 <script setup lang="ts">
-  import { withDefaults } from "vue";
-  import { Link as InertiaLink } from "@inertiajs/vue3";
-  import { linkVariants } from "./variants";
-  import type { LinkProps } from "./types";
+  import { LinkVariants, linkVariants } from "./variants";
+  import { Link, type InertiaLinkProps } from "@inertiajs/vue3";
 
-  const props = withDefaults(defineProps<LinkProps>(), {
-    as: InertiaLink,
-  });
+  export interface Props extends InertiaLinkProps {
+    class?: string;
+    tabindex?: number;
+    linkStyle?: LinkVariants["linkStyle"];
+    color?: LinkVariants["color"];
+  }
+
+  const props = withDefaults(defineProps<Props>(), { tabindex: 0, method: "get", as: "a" });
+  const { href, tabindex, method, as } = props;
 </script>
 
 <template>
-  <component :is="props.as" :class="linkVariants(props)">
+  <Link :href="href" :tabindex="tabindex" :method="method" :as="as" :class="linkVariants(props)">
     <slot />
-  </component>
+  </Link>
 </template>

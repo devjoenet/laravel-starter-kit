@@ -1,5 +1,5 @@
 <template>
-  <div class="card-actions justify-end">
+  <div class="card-actions">
     <slot />
   </div>
 </template>

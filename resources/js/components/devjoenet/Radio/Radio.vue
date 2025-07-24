@@ -1,31 +1,38 @@
-<script setup lang="ts">
-  import { inject, computed } from "vue";
-  import { radioVariants } from "./variants";
-  import { RadioGroupContextKey, type RadioProps } from "./types";
 
-  const props = defineProps<RadioProps>();
-  const context = inject(RadioGroupContextKey);
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { radioVariants } from './cva'
 
-  if (!context) {
-    throw new Error("Radio component must be used within a RadioGroup component.");
-  }
+const props = defineProps<{
+  modelValue: string | number
+  value: string | number
+  color?: keyof ReturnType<typeof radioVariants>['variants']['color']
+  size?: keyof ReturnType<typeof radioVariants>['variants']['size']
+  disabled?: boolean
+  id?: string
+}>()
+const emit = defineEmits(['update:modelValue'])
 
-  // Added a check for context to satisfy TypeScript
-  const isChecked = computed(() => (context ? context.modelValue.value === props.value : false));
-
-  function handleChange() {
-    if (context) {
-      context.modelValue.value = props.value;
-    }
-  }
+const inputId = props.id || `radio-${Math.random().toString(36).slice(2,6)}`
+const classes = computed(() =>
+  radioVariants({ color: props.color, size: props.size }) + (props.disabled ? ' opacity-50 cursor-not-allowed' : '')
+)
+function onChange(e: Event) {
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
+}
 </script>
 
 <template>
-  <label class="inline-flex items-center cursor-pointer">
-    <input type="radio" :name="context.name.value" :value="props.value" :checked="isChecked" class="sr-only" @change="handleChange" />
-    <span :class="radioVariants(props)" />
-    <span v-if="$slots.default" class="label-text ml-2">
-      <slot />
-    </span>
-  </label>
+  <div class="flex items-center">
+    <input
+      :id="inputId"
+      type="radio"
+      :class="classes"
+      :value="props.value"
+      :checked="props.modelValue === props.value"
+      :disabled="props.disabled"
+      @change="onChange"
+    />
+    <label :for="inputId" class="ml-2"><slot /></label>
+  </div>
 </template>

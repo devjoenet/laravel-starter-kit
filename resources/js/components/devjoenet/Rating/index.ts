@@ -1,4 +1,1 @@
-import Rating from "./Rating.vue";
-
-export { Rating };
-export * from "./types";
+export { default as Rating } from './Rating.vue'

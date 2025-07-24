@@ -1,33 +1,34 @@
-<script setup lang="ts">
-  import { ref, watch, onMounted, nextTick } from "vue";
-  import { textareaVariants } from "./variants";
-  import type { TextareaProps } from "./types";
 
-  const props = defineProps<TextareaProps>();
-  const model = defineModel<string>({ default: "" });
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { textareaVariants } from './cva'
 
-  const textareaRef = ref<HTMLTextAreaElement | null>(null);
+const props = defineProps<{
+  modelValue: string
+  rows?: number
+  style?: keyof ReturnType<typeof textareaVariants>['variants']['style']
+  size?: keyof ReturnType<typeof textareaVariants>['variants']['size']
+  disabled?: boolean
+  id?: string
+}>()
+const emit = defineEmits(['update:modelValue'])
 
-  const resize = () => {
-    const el = textareaRef.value;
-    if (el) {
-      // Reset height to shrink correctly
-      el.style.height = "auto";
-      // Set height to the scroll height to grow
-      el.style.height = `${el.scrollHeight}px`;
-    }
-  };
-
-  // Watch for changes in the model (e.g., user typing)
-  watch(model, () => {
-    // Wait for the DOM to update before resizing
-    nextTick(resize);
-  });
-
-  // Set the initial size when the component mounts
-  onMounted(resize);
+const textareaId = props.id || `textarea-${Math.random().toString(36).slice(2,6)}`
+const classes = computed(() =>
+  textareaVariants({ style: props.style, size: props.size }) + (props.disabled ? ' opacity-50 cursor-not-allowed' : '')
+)
+function onInput(e: Event) {
+  emit('update:modelValue', (e.target as HTMLTextAreaElement).value)
+}
 </script>
 
 <template>
-  <textarea ref="textareaRef" v-model="model" :class="textareaVariants(props)" rows="1" style="overflow: hidden" />
+  <textarea
+    :id="textareaId"
+    :class="classes"
+    :rows="props.rows || 4"
+    :value="props.modelValue"
+    :disabled="props.disabled"
+    @input="onInput"
+  ></textarea>
 </template>

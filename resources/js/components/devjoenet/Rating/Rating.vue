@@ -1,26 +1,38 @@
-<script setup lang="ts">
-  import { computed, withDefaults } from "vue";
-  import { ratingVariants } from "./variants";
-  import type { RatingProps } from "./types";
 
-  const props = withDefaults(defineProps<RatingProps>(), {
-    maxRating: 5,
-    mask: "mask-star-2",
-  });
+<script lang="ts" setup>
+import { ref } from 'vue'
+import { ratingVariants } from './cva'
 
-  const model = defineModel<number>();
+const props = defineProps<{
+  modelValue: number
+  max?: number
+  disabled?: boolean
+  size?: keyof ReturnType<typeof ratingVariants>['variants']['size']
+}>()
+const emit = defineEmits(['update:modelValue'])
 
-  // A simple counter for unique IDs
-  let idCounter = 0;
-  const groupName = computed(() => props.name || `rating-group-${idCounter++}`);
+const current = ref(props.modelValue)
+const stars = Array(props.max || 5).fill(0)
+
+function select(idx: number) {
+  if (!props.disabled) {
+    current.value = idx + 1
+    emit('update:modelValue', current.value)
+  }
+}
 </script>
 
 <template>
-  <div :class="ratingVariants(props)">
-    <input v-if="clearable" type="radio" :name="groupName" class="rating-hidden" :checked="!model" @change="model = 0" />
-
-    <template v-for="i in maxRating" :key="i">
-      <input type="radio" :name="groupName" :class="mask" :checked="model === i" @change="model = i" />
-    </template>
+  <div :class="ratingVariants({ size: props.size })">
+    <input
+      v-for="(s, idx) in stars"
+      :key="idx"
+      type="radio"
+      :name="`rating-${Math.random()}`"
+      class="mask mask-star"
+      :checked="idx < current"
+      @click="select(idx)"
+      :disabled="props.disabled"
+    />
   </div>
 </template>

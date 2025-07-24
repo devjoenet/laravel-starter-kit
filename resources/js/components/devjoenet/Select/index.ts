@@ -1,5 +1,1 @@
-import Select from "./Select.vue";
-import SelectOption from "./SelectOption.vue";
-
-export { Select, SelectOption };
-export * from "./types";
+export { default as Select } from './Select.vue'
