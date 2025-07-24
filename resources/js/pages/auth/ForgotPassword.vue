@@ -31,15 +31,7 @@
     <div class="space-y-6">
       <form @submit.prevent="submit">
         <div class="grid gap-2">
-          <Input
-            label="Email"
-            id="email"
-            type="email"
-            name="email"
-            autocomplete="off"
-            v-model="form.email"
-            autofocus
-            placeholder="email@example.com" />
+          <Input label="Email" id="email" type="email" name="email" autocomplete="off" v-model="form.email" autofocus placeholder="email@example.com" />
           <InputError :message="form.errors.email" />
         </div>
 

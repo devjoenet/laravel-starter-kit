@@ -41,13 +41,9 @@
 <template>
   <div
     data-slot="timeline"
-    :class="
-      cn(
-        'group/timeline flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col',
-        props.class,
-      )
-    "
-    :data-orientation="orientation">
+    :class="cn('group/timeline flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col', props.class)"
+    :data-orientation="orientation"
+  >
     <slot />
   </div>
 </template>

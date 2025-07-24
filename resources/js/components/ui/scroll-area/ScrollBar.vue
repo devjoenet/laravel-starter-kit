@@ -25,7 +25,8 @@
         orientation === 'horizontal' && 'h-2.5 flex-col border-t border-t-transparent',
         props.class,
       )
-    ">
+    "
+  >
     <ScrollAreaThumb data-slot="scroll-area-thumb" class="bg-border relative flex-1 rounded-full" />
   </ScrollAreaScrollbar>
 </template>

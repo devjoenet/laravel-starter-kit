@@ -25,7 +25,8 @@
         'border-input bg-background text-muted-foreground/80 hover:bg-accent hover:text-foreground -me-px flex aspect-square h-[inherit] items-center justify-center rounded-e-md border text-sm transition-[color,box-shadow] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
         props.class,
       )
-    ">
+    "
+  >
     <slot>
       <Plus class="h-4 w-4" />
     </slot>

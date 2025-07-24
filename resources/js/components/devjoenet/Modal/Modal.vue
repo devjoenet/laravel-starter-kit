@@ -1,25 +1,28 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-import ModalOverlay from './ModalOverlay.vue'
-import ModalContent from './ModalContent.vue'
-import ModalHeader from './ModalHeader.vue'
-import ModalFooter from './ModalFooter.vue'
-import ModalClose from './ModalClose.vue'
+  import { ref, watch } from "vue";
+  import ModalOverlay from "./ModalOverlay.vue";
+  import ModalContent from "./ModalContent.vue";
+  import ModalHeader from "./ModalHeader.vue";
+  import ModalFooter from "./ModalFooter.vue";
+  import ModalClose from "./ModalClose.vue";
 
-const props = defineProps<{
-  modelValue: boolean;
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-}>()
-const emit = defineEmits(['update:modelValue'])
+  const props = defineProps<{
+    modelValue: boolean;
+    size?: "sm" | "md" | "lg" | "xl" | "full";
+  }>();
+  const emit = defineEmits(["update:modelValue"]);
 
-function close() {
-  emit('update:modelValue', false)
-}
+  function close() {
+    emit("update:modelValue", false);
+  }
 
-// prevent background scroll
-watch(() => props.modelValue, val => {
-  document.body.style.overflow = val ? 'hidden' : ''
-})
+  // prevent background scroll
+  watch(
+    () => props.modelValue,
+    (val) => {
+      document.body.style.overflow = val ? "hidden" : "";
+    },
+  );
 </script>
 
 <template>

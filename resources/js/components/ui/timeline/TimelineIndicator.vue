@@ -15,7 +15,8 @@
         $props.class,
       )
     "
-    aria-hidden="true">
+    aria-hidden="true"
+  >
     <slot />
   </div>
 </template>

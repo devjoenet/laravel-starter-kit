@@ -1,12 +1,7 @@
 <script setup lang="ts">
   import type { HTMLAttributes } from "vue";
   import { reactiveOmit } from "@vueuse/core";
-  import {
-    NavigationMenuRoot,
-    type NavigationMenuRootEmits,
-    type NavigationMenuRootProps,
-    useForwardPropsEmits,
-  } from "reka-ui";
+  import { NavigationMenuRoot, type NavigationMenuRootEmits, type NavigationMenuRootProps, useForwardPropsEmits } from "reka-ui";
   import { cn } from "@/lib/utils";
   import NavigationMenuViewport from "./NavigationMenuViewport.vue";
 
@@ -32,7 +27,8 @@
     data-slot="navigation-menu"
     :data-viewport="viewport"
     v-bind="forwarded"
-    :class="cn('group/navigation-menu relative flex max-w-max flex-1 items-center justify-center', props.class)">
+    :class="cn('group/navigation-menu relative flex max-w-max flex-1 items-center justify-center', props.class)"
+  >
     <slot />
     <NavigationMenuViewport v-if="viewport" />
   </NavigationMenuRoot>

@@ -20,23 +20,13 @@
 </script>
 
 <template>
-  <AuthLayout
-    title="Confirm your password"
-    description="This is a secure area of the application. Please confirm your password before continuing.">
+  <AuthLayout title="Confirm your password" description="This is a secure area of the application. Please confirm your password before continuing.">
     <Head title="Confirm password" />
 
     <form @submit.prevent="submit">
       <div class="space-y-6">
         <div class="grid gap-2">
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            class="mt-1 block w-full"
-            v-model="form.password"
-            required
-            autocomplete="current-password"
-            autofocus />
+          <Input label="Password" id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" autofocus />
 
           <InputError :message="form.errors.password" />
         </div>

@@ -15,7 +15,5 @@
 </script>
 
 <template>
-  <TagsInputInput
-    v-bind="forwardedProps"
-    :class="cn('min-h-6 flex-1 bg-transparent px-1 text-sm focus:outline-none', props.class)" />
+  <TagsInputInput v-bind="forwardedProps" :class="cn('min-h-6 flex-1 bg-transparent px-1 text-sm focus:outline-none', props.class)" />
 </template>

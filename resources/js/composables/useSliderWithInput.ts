@@ -7,20 +7,12 @@ interface UseSliderWithInputProps {
   defaultValue?: number[];
 }
 
-export function useSliderWithInput({
-  minValue = 0,
-  maxValue = 100,
-  initialValue = [minValue],
-  defaultValue = [minValue],
-}: UseSliderWithInputProps) {
+export function useSliderWithInput({ minValue = 0, maxValue = 100, initialValue = [minValue], defaultValue = [minValue] }: UseSliderWithInputProps) {
   const sliderValues = ref(initialValue);
   const inputValues = ref(initialValue.map((v) => v.toString()));
 
   const showReset = computed(() => {
-    return (
-      sliderValues.value.length === defaultValue.length &&
-      !sliderValues.value.every((value, index) => value === defaultValue[index])
-    );
+    return sliderValues.value.length === defaultValue.length && !sliderValues.value.every((value, index) => value === defaultValue[index]);
   });
 
   const validateAndUpdateValue = (rawValue: string, index: number) => {

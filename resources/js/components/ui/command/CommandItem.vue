@@ -76,7 +76,8 @@
       () => {
         filterState.search = '';
       }
-    ">
+    "
+  >
     <slot />
   </ListboxItem>
 </template>

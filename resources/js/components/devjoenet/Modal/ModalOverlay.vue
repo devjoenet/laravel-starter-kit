@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Teleport } from 'vue'
+  import { Teleport } from "vue";
 </script>
 
 <template>

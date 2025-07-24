@@ -14,10 +14,7 @@
 </script>
 
 <template>
-  <DrawerDescription
-    data-slot="drawer-description"
-    v-bind="delegatedProps"
-    :class="cn('text-muted-foreground text-sm', props.class)">
+  <DrawerDescription data-slot="drawer-description" v-bind="delegatedProps" :class="cn('text-muted-foreground text-sm', props.class)">
     <slot />
   </DrawerDescription>
 </template>

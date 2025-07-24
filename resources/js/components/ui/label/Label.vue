@@ -13,12 +13,7 @@
 </script>
 
 <template>
-  <Label
-    data-slot="label"
-    v-bind="delegatedProps"
-    :class="
-      cn('text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70', props.class)
-    ">
+  <Label data-slot="label" v-bind="delegatedProps" :class="cn('text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70', props.class)">
     <slot />
   </Label>
 </template>

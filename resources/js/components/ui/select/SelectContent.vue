@@ -1,13 +1,6 @@
 <script setup lang="ts">
   import { cn } from "@/lib/utils";
-  import {
-    SelectContent,
-    type SelectContentEmits,
-    type SelectContentProps,
-    SelectPortal,
-    SelectViewport,
-    useForwardPropsEmits,
-  } from "reka-ui";
+  import { SelectContent, type SelectContentEmits, type SelectContentProps, SelectPortal, SelectViewport, useForwardPropsEmits } from "reka-ui";
   import { computed, type HTMLAttributes } from "vue";
   import { SelectScrollDownButton, SelectScrollUpButton } from ".";
 
@@ -41,7 +34,8 @@
             'w-full min-w-[var(--reka-select-trigger-width)] data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
           props.class,
         )
-      ">
+      "
+    >
       <SelectScrollUpButton />
       <SelectViewport :class="cn('p-1', position === 'popper' && 'h-[var(--reka-select-trigger-height)]')">
         <slot />

@@ -22,12 +22,14 @@
         )
       "
       :multiple="props.multiple"
-      v-bind="$attrs">
+      v-bind="$attrs"
+    >
       <slot />
     </select>
     <span
       v-if="!props.multiple"
-      class="text-muted-foreground/80 peer-aria-invalid:text-destructive/80 pointer-events-none absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center peer-disabled:opacity-50">
+      class="text-muted-foreground/80 peer-aria-invalid:text-destructive/80 pointer-events-none absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center peer-disabled:opacity-50"
+    >
       <Icon name="lucide:chevron-down" :size="16" aria-hidden="true" />
     </span>
   </div>

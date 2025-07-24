@@ -8,18 +8,14 @@
 
 <template>
   <TreeItem
-    :class="
-      cn(
-        'z-10 ps-(--tree-padding) outline-hidden select-none not-last:pb-0.5 focus:z-20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-        props.class,
-      )
-    "
+    :class="cn('z-10 ps-(--tree-padding) outline-hidden select-none not-last:pb-0.5 focus:z-20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50', props.class)"
     :style="{
       '--tree-padding': `calc(${props.level - 1} * var(--tree-indent))`,
     }"
     :data-folder="props.hasChildren ?? false"
     v-bind="props"
-    v-slot="slotProps">
+    v-slot="slotProps"
+  >
     <slot v-bind="slotProps" />
   </TreeItem>
 </template>

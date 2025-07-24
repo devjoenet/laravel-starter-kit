@@ -14,10 +14,7 @@
 </script>
 
 <template>
-  <DrawerTitle
-    data-slot="drawer-title"
-    v-bind="delegatedProps"
-    :class="cn('text-foreground font-semibold', props.class)">
+  <DrawerTitle data-slot="drawer-title" v-bind="delegatedProps" :class="cn('text-foreground font-semibold', props.class)">
     <slot />
   </DrawerTitle>
 </template>

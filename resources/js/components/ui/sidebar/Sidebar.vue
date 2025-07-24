@@ -21,11 +21,7 @@
 </script>
 
 <template>
-  <div
-    v-if="collapsible === 'none'"
-    data-slot="sidebar"
-    :class="cn('bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col', props.class)"
-    v-bind="$attrs">
+  <div v-if="collapsible === 'none'" data-slot="sidebar" :class="cn('bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col', props.class)" v-bind="$attrs">
     <slot />
   </div>
 
@@ -38,7 +34,8 @@
       class="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
       :style="{
         '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
-      }">
+      }"
+    >
       <SheetHeader class="sr-only">
         <SheetTitle>Sidebar</SheetTitle>
         <SheetDescription>Displays the mobile sidebar.</SheetDescription>
@@ -56,7 +53,8 @@
     :data-state="state"
     :data-collapsible="state === 'collapsed' ? collapsible : ''"
     :data-variant="variant"
-    :data-side="side">
+    :data-side="side"
+  >
     <!-- This is what handles the sidebar gap on desktop  -->
     <div
       :class="
@@ -68,7 +66,8 @@
             ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]'
             : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon)',
         )
-      " />
+      "
+    />
     <div
       :class="
         cn(
@@ -83,10 +82,12 @@
           props.class,
         )
       "
-      v-bind="$attrs">
+      v-bind="$attrs"
+    >
       <div
         data-sidebar="sidebar"
-        class="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm">
+        class="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+      >
         <slot />
       </div>
     </div>

@@ -1,12 +1,7 @@
 <script setup lang="ts">
   import { cn } from "@/lib/utils";
   import { reactiveOmit } from "@vueuse/core";
-  import {
-    NavigationMenuLink,
-    type NavigationMenuLinkEmits,
-    type NavigationMenuLinkProps,
-    useForwardPropsEmits,
-  } from "reka-ui";
+  import { NavigationMenuLink, type NavigationMenuLinkEmits, type NavigationMenuLinkProps, useForwardPropsEmits } from "reka-ui";
   import type { HTMLAttributes } from "vue";
 
   const props = defineProps<NavigationMenuLinkProps & { class?: HTMLAttributes["class"] }>();
@@ -25,7 +20,8 @@
         `data-[active]:focus:bg-accent data-[active]:hover:bg-accent data-[active]:bg-accent data-[active]:text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4' flex flex-col gap-1 rounded-sm p-2 text-sm transition-[color,box-shadow] focus-visible:ring-4 focus-visible:outline-1`,
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </NavigationMenuLink>
 </template>

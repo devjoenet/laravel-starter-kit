@@ -16,14 +16,7 @@
 </script>
 
 <template>
-  <TagsInputRoot
-    v-bind="forwarded"
-    :class="
-      cn(
-        'border-input bg-background flex flex-wrap items-center gap-2 rounded-md border px-3 py-2 text-sm',
-        props.class,
-      )
-    ">
+  <TagsInputRoot v-bind="forwarded" :class="cn('border-input bg-background flex flex-wrap items-center gap-2 rounded-md border px-3 py-2 text-sm', props.class)">
     <slot />
   </TagsInputRoot>
 </template>

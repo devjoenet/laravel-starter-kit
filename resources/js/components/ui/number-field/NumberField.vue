@@ -24,7 +24,8 @@
         'border-input focus-within:border-ring focus-within:ring-ring/50 focus-within:has-aria-invalid:ring-destructive/20 dark:focus-within:has-aria-invalid:ring-destructive/40 focus-within:has-aria-invalid:border-destructive relative inline-flex h-9 w-full items-center overflow-hidden rounded-md border text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-within:ring-[3px] data-disabled:opacity-50',
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </NumberFieldRoot>
 </template>

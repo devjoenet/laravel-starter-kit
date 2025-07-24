@@ -36,7 +36,8 @@
         }),
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </ToggleGroupItem>
 </template>

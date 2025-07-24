@@ -24,7 +24,8 @@
         props.class,
       )
     "
-    :data-completed="step <= activeStep || undefined">
+    :data-completed="step <= activeStep || undefined"
+  >
     <slot />
   </div>
 </template>

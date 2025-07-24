@@ -23,7 +23,8 @@
         props.class,
       )
     "
-    v-bind="forwardedProps">
+    v-bind="forwardedProps"
+  >
     <slot>
       <LucideCalendar :size="16" />
     </slot>

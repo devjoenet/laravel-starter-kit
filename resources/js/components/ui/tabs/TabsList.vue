@@ -16,12 +16,8 @@
   <TabsList
     data-slot="tabs-list"
     v-bind="delegatedProps"
-    :class="
-      cn(
-        'bg-muted text-muted-foreground/70 inline-flex w-fit items-center justify-center rounded-md p-0.5',
-        props.class,
-      )
-    ">
+    :class="cn('bg-muted text-muted-foreground/70 inline-flex w-fit items-center justify-center rounded-md p-0.5', props.class)"
+  >
     <slot />
   </TabsList>
 </template>

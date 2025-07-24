@@ -24,7 +24,8 @@
           : 'data-[placeholder]:text-muted-foreground/70 focus:bg-muted rounded p-0.5 text-sm focus:shadow-black focus:outline-none',
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </DateFieldInput>
 </template>

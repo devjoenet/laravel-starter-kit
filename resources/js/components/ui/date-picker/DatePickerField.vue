@@ -15,7 +15,8 @@
         'border-input bg-background text-foreground focus-within:border-ring focus-within:ring-ring/50 relative flex h-9 items-center rounded-md border px-3 shadow-xs transition-[color,box-shadow] outline-none focus-within:ring-[3px]',
         props.class,
       )
-    ">
+    "
+  >
     <slot v-bind="slotProps" />
   </DatePickerField>
 </template>

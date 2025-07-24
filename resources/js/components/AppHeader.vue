@@ -5,12 +5,7 @@
   import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
   import { Button } from "@/components/ui/button";
   import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-  import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuList,
-    navigationMenuTriggerStyle,
-  } from "@/components/ui/navigation-menu";
+  import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
   import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
   import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
   import UserMenuContent from "@/components/UserMenuContent.vue";
@@ -33,10 +28,7 @@
 
   const isCurrentRoute = computed(() => (url: string) => page.url === url);
 
-  const activeItemStyles = computed(
-    () => (url: string) =>
-      isCurrentRoute.value(url) ? "text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100" : "",
-  );
+  const activeItemStyles = computed(() => (url: string) => (isCurrentRoute.value(url) ? "text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100" : ""));
 
   const mainNavItems: NavItem[] = [
     {
@@ -84,7 +76,8 @@
                     :key="item.title"
                     :href="item.href"
                     class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                    :class="activeItemStyles(item.href)">
+                    :class="activeItemStyles(item.href)"
+                  >
                     <component v-if="item.icon" :is="item.icon" class="h-5 w-5" />
                     {{ item.title }}
                   </Link>
@@ -96,7 +89,8 @@
                     :href="item.href"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex items-center space-x-2 text-sm font-medium">
+                    class="flex items-center space-x-2 text-sm font-medium"
+                  >
                     <component v-if="item.icon" :is="item.icon" class="h-5 w-5" />
                     <span>{{ item.title }}</span>
                   </a>
@@ -114,19 +108,12 @@
         <div class="hidden h-full lg:flex lg:flex-1">
           <NavigationMenu class="ml-10 flex h-full items-stretch">
             <NavigationMenuList class="flex h-full items-stretch space-x-2">
-              <NavigationMenuItem
-                v-for="(item, index) in mainNavItems"
-                :key="index"
-                class="relative flex h-full items-center">
-                <Link
-                  :class="[navigationMenuTriggerStyle(), activeItemStyles(item.href), 'h-9 cursor-pointer px-3']"
-                  :href="item.href">
+              <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" class="relative flex h-full items-center">
+                <Link :class="[navigationMenuTriggerStyle(), activeItemStyles(item.href), 'h-9 cursor-pointer px-3']" :href="item.href">
                   <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
                   {{ item.title }}
                 </Link>
-                <div
-                  v-if="isCurrentRoute(item.href)"
-                  class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
+                <div v-if="isCurrentRoute(item.href)" class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
@@ -161,14 +148,10 @@
 
           <DropdownMenu>
             <DropdownMenuTrigger :as-child="true">
-              <Button
-                variant="ghost"
-                size="icon"
-                class="relative size-10 w-auto rounded-full p-1 focus-within:ring-2 focus-within:ring-primary">
+              <Button variant="ghost" size="icon" class="relative size-10 w-auto rounded-full p-1 focus-within:ring-2 focus-within:ring-primary">
                 <Avatar class="size-8 overflow-hidden rounded-full">
                   <AvatarImage v-if="auth.user.avatar" :src="auth.user.avatar" :alt="auth.user.name" />
-                  <AvatarFallback
-                    class="rounded-lg bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white">
+                  <AvatarFallback class="rounded-lg bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white">
                     {{ getInitials(auth.user?.name) }}
                   </AvatarFallback>
                 </Avatar>

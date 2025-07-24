@@ -16,7 +16,8 @@
         'md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-0',
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </main>
 </template>

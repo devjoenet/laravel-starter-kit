@@ -34,7 +34,8 @@
       )
     "
     :as="as"
-    :as-child="asChild">
+    :as-child="asChild"
+  >
     <slot />
   </Primitive>
 </template>

@@ -36,28 +36,12 @@
     <form @submit.prevent="submit">
       <div class="grid gap-6">
         <div class="grid gap-2">
-          <Input
-            label="Email"
-            id="email"
-            type="email"
-            name="email"
-            autocomplete="email"
-            v-model="form.email"
-            class="mt-1 block w-full"
-            readonly="true" />
+          <Input label="Email" id="email" type="email" name="email" autocomplete="email" v-model="form.email" class="mt-1 block w-full" readonly="true" />
           <InputError :message="form.errors.email" class="mt-2" />
         </div>
 
         <div class="grid gap-2">
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            name="password"
-            autocomplete="new-password"
-            v-model="form.password"
-            class="mt-1 block w-full"
-            autofocus="true" />
+          <Input label="Password" id="password" type="password" name="password" autocomplete="new-password" v-model="form.password" class="mt-1 block w-full" autofocus="true" />
           <InputError :message="form.errors.password" />
         </div>
 
@@ -69,7 +53,8 @@
             name="password_confirmation"
             autocomplete="new-password"
             v-model="form.password_confirmation"
-            class="mt-1 block w-full" />
+            class="mt-1 block w-full"
+          />
           <InputError :message="form.errors.password_confirmation" />
         </div>
 

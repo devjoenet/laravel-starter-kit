@@ -19,15 +19,9 @@
 <template>
   <RangeCalendarNext
     data-slot="range-calendar-next-button"
-    :class="
-      cn(
-        buttonVariants({ variant: 'outline' }),
-        'absolute right-1',
-        'size-7 bg-transparent p-0 opacity-50 hover:opacity-100',
-        props.class,
-      )
-    "
-    v-bind="forwardedProps">
+    :class="cn(buttonVariants({ variant: 'outline' }), 'absolute right-1', 'size-7 bg-transparent p-0 opacity-50 hover:opacity-100', props.class)"
+    v-bind="forwardedProps"
+  >
     <slot>
       <ChevronRight class="size-4" />
     </slot>

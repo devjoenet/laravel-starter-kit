@@ -33,7 +33,8 @@
         props.class,
       )
     "
-    v-bind="forwardedProps">
+    v-bind="forwardedProps"
+  >
     <slot />
   </CalendarCellTrigger>
 </template>

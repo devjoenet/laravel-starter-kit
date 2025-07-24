@@ -12,10 +12,7 @@
 </script>
 
 <template>
-  <CalendarHeadCell
-    data-slot="calendar-head-cell"
-    :class="cn('text-muted-foreground w-9 rounded-md text-[0.8rem] font-normal', props.class)"
-    v-bind="forwardedProps">
+  <CalendarHeadCell data-slot="calendar-head-cell" :class="cn('text-muted-foreground w-9 rounded-md text-[0.8rem] font-normal', props.class)" v-bind="forwardedProps">
     <slot />
   </CalendarHeadCell>
 </template>

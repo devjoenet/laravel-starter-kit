@@ -53,15 +53,7 @@ export type FileUploadActions = {
 };
 
 export const useFileUpload = (options: FileUploadOptions = {}) => {
-  const {
-    maxFiles = Infinity,
-    maxSize = Infinity,
-    accept = "*",
-    multiple = false,
-    initialFiles = [],
-    onFilesChange,
-    onFilesAdded,
-  } = options;
+  const { maxFiles = Infinity, maxSize = Infinity, accept = "*", multiple = false, initialFiles = [], onFilesChange, onFilesAdded } = options;
 
   const files = ref<FileWithPreview[]>(
     initialFiles.map((file) => ({
@@ -166,9 +158,7 @@ export const useFileUpload = (options: FileUploadOptions = {}) => {
 
     newFilesArray.forEach((file) => {
       // Check for duplicates
-      const isDuplicate = files.value.some(
-        (existingFile) => existingFile.file.name === file.name && existingFile.file.size === file.size,
-      );
+      const isDuplicate = files.value.some((existingFile) => existingFile.file.name === file.name && existingFile.file.size === file.size);
 
       // Skip duplicate files silently
       if (isDuplicate) {
@@ -177,11 +167,7 @@ export const useFileUpload = (options: FileUploadOptions = {}) => {
 
       // Check file size
       if (file.size > maxSize) {
-        newErrors.push(
-          multiple
-            ? `Some files exceed the maximum size of ${formatBytes(maxSize)}.`
-            : `File exceeds the maximum size of ${formatBytes(maxSize)}.`,
-        );
+        newErrors.push(multiple ? `Some files exceed the maximum size of ${formatBytes(maxSize)}.` : `File exceeds the maximum size of ${formatBytes(maxSize)}.`);
         return;
       }
 
@@ -217,12 +203,7 @@ export const useFileUpload = (options: FileUploadOptions = {}) => {
     if (!id) return;
 
     const fileToRemove = files.value.find((file) => file.id === id);
-    if (
-      fileToRemove &&
-      fileToRemove.preview &&
-      fileToRemove.file instanceof File &&
-      fileToRemove.file.type.startsWith("image/")
-    ) {
+    if (fileToRemove && fileToRemove.preview && fileToRemove.file instanceof File && fileToRemove.file.type.startsWith("image/")) {
       URL.revokeObjectURL(fileToRemove.preview);
     }
 

@@ -23,7 +23,8 @@
         'bg-secondary data-[state=active]:ring-ring ring-offset-background flex h-6 items-center rounded data-[state=active]:ring-2 data-[state=active]:ring-offset-2',
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </TagsInputItem>
 </template>

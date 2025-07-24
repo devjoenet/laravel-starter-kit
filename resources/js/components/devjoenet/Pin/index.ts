@@ -1,1 +1,1 @@
-export { default as Pin } from './Pin.vue'
+export { default as Pin } from "./Pin.vue";

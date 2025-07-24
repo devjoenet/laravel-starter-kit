@@ -27,7 +27,8 @@
     }"
     :class="cn('flex flex-col', props.class)"
     v-bind="forwarded"
-    v-slot="slotProps">
+    v-slot="slotProps"
+  >
     <slot v-bind="slotProps" />
   </TreeRoot>
 </template>

@@ -15,5 +15,6 @@
         $props.class,
       )
     "
-    aria-hidden="true" />
+    aria-hidden="true"
+  />
 </template>

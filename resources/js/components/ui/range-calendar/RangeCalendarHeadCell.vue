@@ -15,10 +15,7 @@
 </script>
 
 <template>
-  <RangeCalendarHeadCell
-    data-slot="range-calendar-head-cell"
-    :class="cn('text-muted-foreground w-8 rounded-md text-[0.8rem] font-normal', props.class)"
-    v-bind="forwardedProps">
+  <RangeCalendarHeadCell data-slot="range-calendar-head-cell" :class="cn('text-muted-foreground w-8 rounded-md text-[0.8rem] font-normal', props.class)" v-bind="forwardedProps">
     <slot />
   </RangeCalendarHeadCell>
 </template>

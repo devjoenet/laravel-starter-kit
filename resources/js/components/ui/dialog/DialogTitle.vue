@@ -15,10 +15,7 @@
 </script>
 
 <template>
-  <DialogTitle
-    data-slot="dialog-title"
-    v-bind="forwardedProps"
-    :class="cn('text-lg leading-none font-semibold tracking-tight', props.class)">
+  <DialogTitle data-slot="dialog-title" v-bind="forwardedProps" :class="cn('text-lg leading-none font-semibold tracking-tight', props.class)">
     <slot />
   </DialogTitle>
 </template>

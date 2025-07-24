@@ -24,7 +24,8 @@
         'group-data-[collapsible=icon]:hidden',
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </Primitive>
 </template>

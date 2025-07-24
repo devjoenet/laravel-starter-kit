@@ -12,10 +12,7 @@
 </script>
 
 <template>
-  <CalendarHeader
-    data-slot="calendar-header"
-    :class="cn('relative flex w-full items-center justify-center pt-1', props.class)"
-    v-bind="forwardedProps">
+  <CalendarHeader data-slot="calendar-header" :class="cn('relative flex w-full items-center justify-center pt-1', props.class)" v-bind="forwardedProps">
     <slot />
   </CalendarHeader>
 </template>

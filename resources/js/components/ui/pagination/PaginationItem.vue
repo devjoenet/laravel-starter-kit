@@ -33,7 +33,8 @@
         }),
         props.class,
       )
-    ">
+    "
+  >
     <slot />
   </PaginationListItem>
 </template>

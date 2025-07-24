@@ -20,12 +20,8 @@
   <StepperItem
     v-slot="slotProps"
     v-bind="forwarded"
-    :class="
-      cn(
-        'group/step flex items-center group-data-[orientation=horizontal]/stepper:flex-row group-data-[orientation=vertical]/stepper:flex-col',
-        props.class,
-      )
-    ">
+    :class="cn('group/step flex items-center group-data-[orientation=horizontal]/stepper:flex-row group-data-[orientation=vertical]/stepper:flex-col', props.class)"
+  >
     <slot v-bind="slotProps" />
   </StepperItem>
 </template>

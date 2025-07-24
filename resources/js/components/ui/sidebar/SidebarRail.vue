@@ -28,7 +28,8 @@
         props.class,
       )
     "
-    @click="toggleSidebar">
+    @click="toggleSidebar"
+  >
     <slot />
   </button>
 </template>

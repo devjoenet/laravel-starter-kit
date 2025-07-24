@@ -1,11 +1,6 @@
 <script lang="ts" setup>
   import { cn } from "@/lib/utils";
-  import {
-    RangeCalendarRoot,
-    type RangeCalendarRootEmits,
-    type RangeCalendarRootProps,
-    useForwardPropsEmits,
-  } from "reka-ui";
+  import { RangeCalendarRoot, type RangeCalendarRootEmits, type RangeCalendarRootProps, useForwardPropsEmits } from "reka-ui";
   import { computed, type HTMLAttributes } from "vue";
   import {
     RangeCalendarCell,
@@ -35,11 +30,7 @@
 </script>
 
 <template>
-  <RangeCalendarRoot
-    v-slot="{ grid, weekDays }"
-    data-slot="range-calendar"
-    :class="cn('p-3', props.class)"
-    v-bind="forwarded">
+  <RangeCalendarRoot v-slot="{ grid, weekDays }" data-slot="range-calendar" :class="cn('p-3', props.class)" v-bind="forwarded">
     <RangeCalendarHeader>
       <RangeCalendarHeading />
 
@@ -60,10 +51,7 @@
             </RangeCalendarGridRow>
           </RangeCalendarGridHead>
           <RangeCalendarGridBody>
-            <RangeCalendarGridRow
-              v-for="(weekDates, index) in month.rows"
-              :key="`weekDate-${index}`"
-              class="mt-2 w-full">
+            <RangeCalendarGridRow v-for="(weekDates, index) in month.rows" :key="`weekDate-${index}`" class="mt-2 w-full">
               <RangeCalendarCell v-for="weekDate in weekDates" :key="weekDate.toString()" :date="weekDate">
                 <RangeCalendarCellTrigger :day="weekDate" :month="month.value" />
               </RangeCalendarCell>
