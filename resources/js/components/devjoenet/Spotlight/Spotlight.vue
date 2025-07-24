@@ -121,7 +121,7 @@
         {{ props.noResultsText }}
       </div>
       <div v-for="(item, i) in results" :key="i" @click="close">
-        <a :href="item.link" class="block p-2 hover:bg-base-200 flex items-center gap-2" tabindex="0">
+        <a :href="item.link" class="p-2 hover:bg-base-200 flex items-center gap-2" tabindex="0">
           <template v-if="item.icon">
             <span v-html="item.icon"></span>
           </template>
