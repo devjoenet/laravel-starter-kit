@@ -1,25 +1,19 @@
-<script lang="ts" setup>
-  import { computed } from "vue";
-  import { Link as InertiaLink } from "@inertiajs/inertia-vue3";
-  import { linkVariants } from "./cva";
+<script setup lang="ts">
+  import { Method } from "@inertiajs/core";
+  import { Link } from "@inertiajs/vue3";
 
-  const props = defineProps<{
+  interface Props {
     href: string;
-    style?: "normal" | "hover";
-    color?: keyof typeof linkVariants.__config.variants.color;
-  }>();
+    tabindex?: number;
+    method?: Method;
+    as?: string;
+  }
 
-  const classes = computed(() => linkVariants({ style: props.style, color: props.color }));
+  defineProps<Props>();
 </script>
 
 <template>
-  <!-- Use InertiaLink for internal navigation -->
-  <InertiaLink v-if="props.href.startsWith('/')" :href="props.href" :class="classes">
+  <Link :href="href" :tabindex="tabindex" :method="method" :as="as">
     <slot />
-  </InertiaLink>
-
-  <!-- Fallback for external links -->
-  <a v-else :href="props.href" :class="classes" target="_blank" rel="noopener noreferrer">
-    <slot />
-  </a>
+  </Link>
 </template>

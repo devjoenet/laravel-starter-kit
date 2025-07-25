@@ -51,16 +51,23 @@
   },
   "scripts": {
     "ide-helper": [
+      "@php artisan clear-compiled",
+      "@php artisan optimize:clear",
       "@php artisan ide-helper:generate",
-      "@php artisan ide-helper:models --write-mixin --write-eloquent-helper --reset",
-      "@php artisan ide-helper:meta"
+      "@php artisan ide-helper:meta",
+      "@php artisan ide-helper:models --write-mixin --write-eloquent-helper --reset"
     ],
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover --ansi"
     ],
+    "post-install-cmd": [
+      "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+      "@ide-helper"
+    ],
     "post-update-cmd": [
-      "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+      "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+      "@ide-helper"
     ],
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

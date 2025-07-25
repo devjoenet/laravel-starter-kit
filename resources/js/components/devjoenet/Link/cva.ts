@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 
 export const linkVariants = cva("link", {
   variants: {
@@ -22,3 +22,5 @@ export const linkVariants = cva("link", {
     color: "primary",
   },
 });
+
+export type LinkVariants = VariantProps<typeof linkVariants>;
