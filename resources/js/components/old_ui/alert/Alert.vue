@@ -18,7 +18,7 @@
 </script>
 
 <template>
-  <div :class="cn(alertVariants({ variant }), props.class)" role="alert">
+  <div :class="cn(alertVariants(props.variant), props.class)" role="alert">
     <component :is="iconComponent" class="h-5 w-5" />
     <slot />
   </div>

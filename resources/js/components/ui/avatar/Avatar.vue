@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { computed } from "vue";
-  import { avatarVariants } from "./Cva";
+  import { avatarVariants } from "./cva";
 
   const props = defineProps<{
     src?: string;

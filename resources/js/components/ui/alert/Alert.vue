@@ -1,33 +1,35 @@
 <script lang="ts" setup>
-  import { computed } from "vue";
-  import { alertVariants } from "./cva";
+  import { HTMLAttributes } from "vue";
+  import { cn } from "@/lib/utils";
+  import { alertVariants, type AlertVariantProps } from "./cva";
   import AlertIcon from "./AlertIcon.vue";
   import AlertContent from "./AlertContent.vue";
   import AlertDismiss from "./AlertDismiss.vue";
 
-  const props = defineProps<{
-    severity?: "info" | "success" | "warning" | "error";
-    variant?: "filled" | "outlined" | "soft";
-    icon?: boolean;
-    dismissible?: boolean;
-    title?: string;
-    class?: string;
-  }>();
+  const props = withDefaults(
+    defineProps<{
+      severity: AlertVariantProps["severity"];
+      variant: AlertVariantProps["variant"];
+      icon: boolean;
+      dismissible: boolean;
+      title?: string;
+      class?: HTMLAttributes["class"];
+    }>(),
+    {
+      severity: "info",
+      variant: "filled",
+      icon: true,
+      dismissible: false,
+      title: undefined,
+      class: undefined,
+    },
+  );
 
   const emit = defineEmits(["close"]);
-
-  const variantClass = computed(() => {
-    return (
-      alertVariants({
-        severity: props.severity,
-        variant: props.variant,
-      }) + (props.class ? ` ${props.class}` : "")
-    );
-  });
 </script>
 
 <template>
-  <div :class="variantClass">
+  <div :class="cn(alertVariants({ severity, variant }), props.class)">
     <AlertIcon v-if="props.icon || $slots.icon" :severity="props.severity">
       <template #default>
         <slot name="icon" />

@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 
 export const alertVariants = cva("alert", {
   variants: {
@@ -14,8 +14,7 @@ export const alertVariants = cva("alert", {
       soft: "alert-soft",
     },
   },
-  defaultVariants: {
-    severity: "info",
-    variant: "filled",
-  },
+  defaultVariants: { severity: "info", variant: "filled" },
 });
+
+export type AlertVariantProps = VariantProps<typeof alertVariants>;

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  const props = defineProps<{ severity?: "info" | "success" | "warning" | "error" }>();
+  const props = defineProps<{ severity: "info" | "success" | "warning" | "error" | null | undefined }>();
 </script>
 
 <template>
