@@ -1,13 +1,28 @@
 <script lang="ts" setup>
-  import { provide, computed } from "vue";
-  import { stepsVariants } from "./steps.cva";
+  import { provide, toRef, computed } from "vue";
+  import { stepsVariants } from "./cva";
 
-  const props = defineProps<{ current: number; direction?: "horizontal" | "vertical" }>();
-  provide("currentStep", props.current);
-  const classes = computed(() => stepsVariants({ direction: props.direction as any }));
+  // Make `current` optional and default it to 0, `direction` defaults to 'horizontal'
+  const props = withDefaults(
+    defineProps<{
+      current?: number;
+      direction?: "horizontal" | "vertical";
+    }>(),
+    {
+      current: 0,
+      direction: "horizontal",
+    },
+  );
+
+  // Turn that prop into a ref so updates flow downhill
+  const currentStep = toRef(props, "current");
+  provide("currentStep", currentStep);
+
+  const classes = computed(() => stepsVariants({ direction: props.direction }));
 </script>
+
 <template>
-  <ul :class="classes">
+  <div :class="classes">
     <slot />
-  </ul>
+  </div>
 </template>
