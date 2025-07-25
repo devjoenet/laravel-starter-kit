@@ -1,14 +1,39 @@
-<script setup lang="ts">
-  import { cn } from "@/lib/utils";
-  import type { HTMLAttributes } from "vue";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { cardVariants } from "./cva";
 
   const props = defineProps<{
-    class?: HTMLAttributes["class"];
+    style?: "none" | "bordered" | "dash";
+    side?: "vertical" | "horizontal";
+    imageFull?: boolean;
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    class?: string;
   }>();
+
+  const variantClass = computed(
+    () =>
+      cardVariants({
+        style: props.style,
+        side: props.side,
+        imageFull: props.imageFull,
+        size: props.size,
+      }) + (props.class ? ` ${props.class}` : ""),
+  );
 </script>
 
 <template>
-  <div data-slot="card" :class="cn('bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6', props.class)">
-    <slot />
+  <div :class="variantClass">
+    <slot name="image" />
+    <CardBody>
+      <template #default>
+        <CardHeader v-if="$slots.header">
+          <slot name="header" />
+        </CardHeader>
+        <slot />
+        <CardActions v-if="$slots.actions">
+          <slot name="actions" />
+        </CardActions>
+      </template>
+    </CardBody>
   </div>
 </template>

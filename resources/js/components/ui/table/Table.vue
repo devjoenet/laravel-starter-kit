@@ -1,15 +1,20 @@
-<script setup lang="ts">
-  import { cn } from "@/lib/utils";
-  import type { HTMLAttributes } from "vue";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { tableVariants } from "./cva";
 
-  const props = defineProps<{
-    class?: HTMLAttributes["class"];
+  defineProps<{
+    zebra?: boolean;
+    pinRows?: boolean;
+    pinCols?: boolean;
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
   }>();
+  const props = defineProps<any>();
+  const classes = computed(() => tableVariants({ zebra: props.zebra, pinRows: props.pinRows, pinCols: props.pinCols, size: props.size }));
 </script>
 
 <template>
-  <div data-slot="table-container" class="relative w-full overflow-auto">
-    <table data-slot="table" :class="cn('w-full caption-bottom text-sm', props.class)">
+  <div class="overflow-x-auto">
+    <table :class="classes">
       <slot />
     </table>
   </div>

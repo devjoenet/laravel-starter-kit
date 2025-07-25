@@ -1,22 +1,19 @@
-<script setup lang="ts">
-  import type { HTMLAttributes } from "vue";
-  import { cn } from "@/lib/utils";
-  import { reactiveOmit } from "@vueuse/core";
-  import { PaginationRoot, type PaginationRootEmits, type PaginationRootProps, useForwardPropsEmits } from "reka-ui";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { paginationVariants } from "./cva";
 
-  const props = defineProps<
-    PaginationRootProps & {
-      class?: HTMLAttributes["class"];
-    }
-  >();
-  const emits = defineEmits<PaginationRootEmits>();
-
-  const delegatedProps = reactiveOmit(props, "class");
-  const forwarded = useForwardPropsEmits(delegatedProps, emits);
+  declare const defineProps: any;
+  const props = defineProps<{ pages: number; modelValue: number; size?: string }>();
+  const emit = defineEmits(["update:modelValue"]);
+  const classes = computed(() => paginationVariants({ size: props.size as any }));
+  function select(page: number) {
+    emit("update:modelValue", page);
+  }
 </script>
-
 <template>
-  <PaginationRoot v-slot="slotProps" data-slot="pagination" v-bind="forwarded" :class="cn('mx-auto flex w-full justify-center', props.class)">
-    <slot v-bind="slotProps" />
-  </PaginationRoot>
+  <div :class="classes">
+    <button v-for="page in props.pages" :key="page" class="btn" :class="{ 'btn-active': page === props.modelValue }" @click="select(page)">
+      {{ page }}
+    </button>
+  </div>
 </template>

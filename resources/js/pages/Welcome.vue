@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { Head, Link } from "@inertiajs/vue3";
-  import { Timeline, TimelineItem } from "@/components/devjoenet/Timeline";
 </script>
 
 <template>
@@ -13,11 +12,11 @@
     <!-- Header/Nav -->
     <header class="mb-6 w-full max-w-[335px] lg:max-w-4xl">
       <nav class="flex justify-end gap-4 text-sm">
-        <Button v-if="$page.props.auth.user" as="Link" :href="route('dashboard')" variant="text" size="sm"> Dashboard </Button>
+        <Link v-if="$page.props.auth.user" as="Link" :href="route('dashboard')" variant="text" size="sm"> Dashboard </Link>
 
         <template v-else>
-          <Button as="Link" :href="route('login')" variant="text" size="sm"> Log in </Button>
-          <Button as="Link" :href="route('register')" variant="text" size="sm"> Register </Button>
+          <Link as="a" :href="route('login')" variant="text" size="sm"> Log in </Link>
+          <Link as="a" :href="route('register')" variant="text" size="sm"> Register </Link>
         </template>
       </nav>
     </header>

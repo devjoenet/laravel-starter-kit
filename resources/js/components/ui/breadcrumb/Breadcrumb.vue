@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-  import type { HTMLAttributes } from "vue";
+  import { computed } from "vue";
+  import { breadcrumbsVariants } from "./cva";
 
-  const props = defineProps<{
-    class?: HTMLAttributes["class"];
-  }>();
+  defineProps<{ separator?: "slash" | "arrow" | "dot" }>();
+  const props = defineProps<{ separator?: string }>();
+  const classes = computed(() => breadcrumbsVariants({ separator: props.separator as any }));
 </script>
-
 <template>
-  <nav aria-label="breadcrumb" data-slot="breadcrumb" :class="props.class">
-    <slot />
+  <nav aria-label="breadcrumb">
+    <ol :class="classes">
+      <slot />
+    </ol>
   </nav>
 </template>

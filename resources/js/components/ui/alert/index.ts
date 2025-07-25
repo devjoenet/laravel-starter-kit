@@ -1,14 +1,4 @@
-import { InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
-
 export { default as Alert } from "./Alert.vue";
-export { default as AlertTitle } from "./AlertTitle.vue";
-export { default as AlertDescription } from "./AlertDescription.vue";
-
-export const Icon = function (variant: string = "info") {
-  return {
-    info: InformationCircleIcon,
-    success: CheckCircleIcon,
-    warning: ExclamationTriangleIcon,
-    error: XCircleIcon,
-  }[variant];
-};
+export { default as AlertContent } from "./AlertContent.vue";
+export { default as AlertDismiss } from "./AlertDismiss.vue";
+export { default as AlertIcon } from "./AlertIcon.vue";

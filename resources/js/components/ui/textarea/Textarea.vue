@@ -1,33 +1,24 @@
-<script setup lang="ts">
-  import { cn } from "@/lib/utils";
-  import { useVModel } from "@vueuse/core";
-  import type { HTMLAttributes } from "vue";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { textareaVariants } from "./cva";
 
   const props = defineProps<{
-    class?: HTMLAttributes["class"];
-    defaultValue?: string | number;
-    modelValue?: string | number;
+    modelValue: string;
+    rows?: number;
+    style?: keyof ReturnType<typeof textareaVariants>["variants"]["style"];
+    size?: keyof ReturnType<typeof textareaVariants>["variants"]["size"];
+    disabled?: boolean;
+    id?: string;
   }>();
+  const emit = defineEmits(["update:modelValue"]);
 
-  const emits = defineEmits<{
-    (e: "update:modelValue", payload: string | number): void;
-  }>();
-
-  const modelValue = useVModel(props, "modelValue", emits, {
-    passive: true,
-    defaultValue: props.defaultValue,
-  });
+  const textareaId = props.id || `textarea-${Math.random().toString(36).slice(2, 6)}`;
+  const classes = computed(() => textareaVariants({ style: props.style, size: props.size }) + (props.disabled ? " opacity-50 cursor-not-allowed" : ""));
+  function onInput(e: Event) {
+    emit("update:modelValue", (e.target as HTMLTextAreaElement).value);
+  }
 </script>
 
 <template>
-  <textarea
-    v-model="modelValue"
-    data-slot="textarea"
-    :class="
-      cn(
-        'border-input placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex min-h-19.5 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
-        props.class,
-      )
-    "
-  />
+  <textarea :id="textareaId" :class="classes" :rows="props.rows || 4" :value="props.modelValue" :disabled="props.disabled" @input="onInput"></textarea>
 </template>

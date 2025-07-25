@@ -1,25 +1,41 @@
-<script setup lang="ts">
-  import type { HTMLAttributes } from "vue";
-  import { InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
-  import { alertVariants, type AlertVariants } from "@/components/ui/alert/AlertVariants";
-  import { cn } from "@/lib/utils";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { alertVariants } from "./cva";
+  import AlertIcon from "./AlertIcon.vue";
+  import AlertContent from "./AlertContent.vue";
+  import AlertDismiss from "./AlertDismiss.vue";
 
   const props = defineProps<{
-    class?: HTMLAttributes["class"];
-    variant?: AlertVariants["variant"];
+    severity?: "info" | "success" | "warning" | "error";
+    variant?: "filled" | "outlined" | "soft";
+    icon?: boolean;
+    dismissible?: boolean;
+    title?: string;
+    class?: string;
   }>();
 
-  const iconComponent = {
-    info: InformationCircleIcon,
-    success: CheckCircleIcon,
-    warning: ExclamationTriangleIcon,
-    error: XCircleIcon,
-  }[props.variant || "info"];
+  const emit = defineEmits(["close"]);
+
+  const variantClass = computed(() => {
+    return (
+      alertVariants({
+        severity: props.severity,
+        variant: props.variant,
+      }) + (props.class ? ` ${props.class}` : "")
+    );
+  });
 </script>
 
 <template>
-  <div :class="cn(alertVariants({ variant }), props.class)" role="alert">
-    <component :is="iconComponent" class="h-5 w-5" />
-    <slot />
+  <div :class="variantClass">
+    <AlertIcon v-if="props.icon || $slots.icon" :severity="props.severity">
+      <template #default>
+        <slot name="icon" />
+      </template>
+    </AlertIcon>
+    <AlertContent :title="props.title">
+      <slot />
+    </AlertContent>
+    <AlertDismiss v-if="props.dismissible" @close="emit('close')" />
   </div>
 </template>

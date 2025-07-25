@@ -1,49 +1,18 @@
-<script setup lang="ts">
-  import { cn } from "@/lib/utils";
-  import { computed, provide, ref } from "vue";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { timelineVariants } from "./cva";
 
-  interface TimelineContextValue {
-    activeStep: number;
-    setActiveStep: (step: number) => void;
-  }
-
-  const props = withDefaults(
-    defineProps<{
-      defaultValue?: number;
-      value?: number;
-      onValueChange?: (value: number) => void;
-      orientation?: "horizontal" | "vertical";
-      class?: string;
-    }>(),
-    {
-      defaultValue: 1,
-      orientation: "vertical",
-    },
-  );
-
-  const activeStep = ref(props.defaultValue);
-
-  const setActiveStep = (step: number) => {
-    if (props.value === undefined) {
-      activeStep.value = step;
-    }
-    props.onValueChange?.(step);
-  };
-
-  const currentStep = computed(() => props.value ?? activeStep.value);
-
-  provide<TimelineContextValue>("timeline", {
-    activeStep: currentStep.value,
-    setActiveStep,
-  });
+  const props = defineProps<{
+    direction?: "vertical" | "horizontal";
+    snapIcon?: boolean;
+    box?: boolean;
+    compact?: boolean;
+  }>();
+  const classes = computed(() => timelineVariants({ direction: props.direction, snapIcon: props.snapIcon, box: props.box, compact: props.compact }));
 </script>
 
 <template>
-  <div
-    data-slot="timeline"
-    :class="cn('group/timeline flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col', props.class)"
-    :data-orientation="orientation"
-  >
+  <ul :class="classes">
     <slot />
-  </div>
+  </ul>
 </template>

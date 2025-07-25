@@ -1,15 +1,30 @@
-<script setup lang="ts">
-  import type { SelectRootEmits, SelectRootProps } from "reka-ui";
-  import { SelectRoot, useForwardPropsEmits } from "reka-ui";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { selectVariants } from "./cva";
 
-  const props = defineProps<SelectRootProps>();
-  const emits = defineEmits<SelectRootEmits>();
+  const props = defineProps<{
+    modelValue: string | number;
+    options: Array<{ label: string; value: string | number }>;
+    style?: keyof ReturnType<typeof selectVariants>["variants"]["style"];
+    size?: keyof ReturnType<typeof selectVariants>["variants"]["size"];
+    disabled?: boolean;
+    id?: string;
+  }>();
+  const emit = defineEmits(["update:modelValue"]);
 
-  const forwarded = useForwardPropsEmits(props, emits);
+  const selectId = props.id || `select-${Math.random().toString(36).slice(2, 6)}`;
+  const classes = computed(() => selectVariants({ style: props.style, size: props.size }) + (props.disabled ? " opacity-50 cursor-not-allowed" : ""));
+  function onChange(e: Event) {
+    emit("update:modelValue", (e.target as HTMLSelectElement).value);
+  }
 </script>
 
 <template>
-  <SelectRoot data-slot="select" v-bind="forwarded">
-    <slot />
-  </SelectRoot>
+  <div class="flex flex-col">
+    <select :id="selectId" :class="classes" :value="props.modelValue" :disabled="props.disabled" @change="onChange">
+      <option v-for="opt in props.options" :key="opt.value" :value="opt.value">
+        {{ opt.label }}
+      </option>
+    </select>
+  </div>
 </template>

@@ -1,25 +1,17 @@
-<script setup lang="ts">
-  import { cn } from "@/lib/utils";
-  import { ProgressIndicator, ProgressRoot, type ProgressRootProps } from "reka-ui";
-  import { computed, type HTMLAttributes } from "vue";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { progressVariants } from "./cva";
 
-  const props = withDefaults(defineProps<ProgressRootProps & { class?: HTMLAttributes["class"] }>(), {
-    modelValue: 0,
-  });
+  const props = defineProps<{
+    value: number;
+    max?: number;
+    color?: "neutral" | "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error";
+    class?: string;
+  }>();
 
-  const delegatedProps = computed(() => {
-    const { class: _, ...delegated } = props;
-
-    return delegated;
-  });
+  const classes = computed(() => progressVariants({ color: props.color }) + (props.class ? ` ${props.class}` : ""));
 </script>
 
 <template>
-  <ProgressRoot data-slot="progress" v-bind="delegatedProps" :class="cn('bg-primary/20 relative h-2 w-full overflow-hidden rounded-full', props.class)">
-    <ProgressIndicator
-      data-slot="progress-indicator"
-      class="bg-primary h-full w-full flex-1 transition-all"
-      :style="`transform: translateX(-${100 - (props.modelValue ?? 0)}%);`"
-    />
-  </ProgressRoot>
+  <progress :class="classes" :value="props.value" :max="props.max ?? 100"></progress>
 </template>

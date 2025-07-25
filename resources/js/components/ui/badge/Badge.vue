@@ -1,26 +1,26 @@
-<script setup lang="ts">
-  import { cn } from "@/lib/utils";
-  import type { PrimitiveProps } from "reka-ui";
-  import { Primitive } from "reka-ui";
-  import { computed, type HTMLAttributes } from "vue";
-  import { type BadgeVariants, badgeVariants } from ".";
+<script lang="ts" setup>
+  import { computed } from "vue";
+  import { badgeVariants } from "./cva";
 
-  const props = defineProps<
-    PrimitiveProps & {
-      variant?: BadgeVariants["variant"];
-      class?: HTMLAttributes["class"];
-    }
-  >();
+  const props = defineProps<{
+    color?: "neutral" | "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error";
+    style?: "solid" | "outline" | "dash" | "soft" | "ghost";
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    class?: string;
+  }>();
 
-  const delegatedProps = computed(() => {
-    const { class: _, ...delegated } = props;
-
-    return delegated;
-  });
+  const classes = computed(
+    () =>
+      badgeVariants({
+        color: props.color,
+        style: props.style,
+        size: props.size,
+      }) + (props.class ? ` ${props.class}` : ""),
+  );
 </script>
 
 <template>
-  <Primitive data-slot="badge" :class="cn(badgeVariants({ variant }), props.class)" v-bind="delegatedProps">
+  <span :class="classes">
     <slot />
-  </Primitive>
+  </span>
 </template>
