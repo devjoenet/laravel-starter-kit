@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 
 export const chatVariants = cva("chat", {
   variants: {
@@ -29,3 +29,6 @@ export const chatBubbleVariants = cva("chat-bubble", {
     color: "neutral",
   },
 });
+
+export type ChatBubbleVariantProps = VariantProps<typeof chatBubbleVariants>;
+export type ChatVariantProps = VariantProps<typeof chatVariants>;

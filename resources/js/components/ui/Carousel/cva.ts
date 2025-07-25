@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 
 export const carouselVariants = cva("carousel", {
   variants: {
@@ -10,3 +10,5 @@ export const carouselVariants = cva("carousel", {
   },
   defaultVariants: { start: false, center: false, end: false, horizontal: false, vertical: false },
 });
+
+export type CarouselVariantProps = VariantProps<typeof carouselVariants>;
