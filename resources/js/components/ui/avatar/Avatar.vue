@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-  import { computed } from "vue";
-  import { avatarVariants } from "./cva";
+  import { type HTMLAttributes } from "vue";
+  import { avatarVariants, type AvatarVariantProps } from "./cva";
+  import { cn } from "@/lib/utils";
 
   const props = defineProps<{
-    src?: string;
-    alt?: string;
-    shape?: "circle" | "squircle" | "hexagon" | "triangle" | "square";
-    status?: "online" | "offline" | "placeholder";
-    sizeClass?: string;
+    src?: HTMLImageElement["src"];
+    alt?: HTMLImageElement["alt"];
+    shape?: AvatarVariantProps["shape"];
+    status?: AvatarVariantProps["status"];
+    class?: HTMLAttributes["class"];
     fallback?: string;
   }>();
 
@@ -15,12 +16,10 @@
     const img = e.target as HTMLImageElement;
     if (props.fallback) img.src = props.fallback;
   }
-
-  const classes = computed(() => avatarVariants({ shape: props.shape, status: props.status }) + (props.sizeClass ? ` ${props.sizeClass}` : ""));
 </script>
 
 <template>
-  <div :class="classes">
+  <div :class="cn(avatarVariants({ shape: props.shape, status: props.status }), props.class)">
     <div>
       <img v-if="props.src" :src="props.src" :alt="props.alt || ''" @error="onError" />
       <slot v-else />
