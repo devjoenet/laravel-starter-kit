@@ -1,3 +1,58 @@
+# General Rules
+## ✅ Laravel-First Conventions
+	•	Follow Laravel’s naming and structural conventions (routes, controllers, models, service classes).
+	•	Prefer resource controllers, Eloquent relationships, and request validation.
+	•	Leverage Laravel helpers and facades cleanly and idiomatically.
+
+## 🧠 PSR Compliance + Modern PHP
+	•	Use strict types, typed properties, return types, and constructor property promotion.
+	•	Consistently apply PSR-1, PSR-4 autoloading, and PSR-12 code formatting.
+
+## 🧼 Code Style & Readability
+	•	Use early returns to reduce nesting.
+	•	Prefer short nullables (e.g., ??, ?->, null-safe calls).
+	•	Avoid comments in favor of clear, self-explanatory code and function names.
+	•	Use named arguments when it adds clarity.
+
+## 📦 Data Transfer & Collections
+	•	Use DTOs (Data Transfer Objects) for transporting data.
+	•	Embrace Laravel Collections for fluent, readable data manipulation.
+	•	Avoid logic in blade templates — use ViewModels or presentational DTOs.
+## 🎯 Class & Method Design
+	•	Keep methods small and focused (Single Responsibility Principle).
+	•	Avoid bloated controllers — business logic should go in actions, services, or jobs.
+	•	Use interfaces and contracts for dependencies when abstraction is needed.
+
+## 🛠️ Testing and Maintainability
+	•	Use dependency injection and constructor-based bindings.
+	•	Structure code to be testable and modular.
+	•	Favor readability and maintainability over clever tricks or micro-optimizations.
+
+# Handling a request concerning Vue Components
+- Styles stem from our main CSS file in `./resources/css/app.css`, which contains themeing for DaisyUI. For now, I would like to use the default `night` theme for dark mode, and the default `winter` theme for light mode.
+  - When needing to add a styling we don't have covered, we can either add a class to our app.css that uses the `@apply` tailwindcss directive (preferable), or add custom styles to our Vue SFC directly if needed.
+- We are going to be adapting other community solutions to our UI and frontend. We will do this by analyzing example components and writing new ones in a specific location.
+  - The old components are located in `./resources/js/components/old_ui/`
+  - Our new ones will be written to `./resources/js/components/ui/`
+  - There are also several old components in `./resources/js/components/` that use the `old_ui` files. We will need to adapt these to use our new components when we are able.
+- The front-end integration is handled by InertiaJs. The base blade view that all pages will use is `./resources/views/app.blade.php`
+  - Each component in `./resources/js/pages/` will be a frontend view for our Laravel app.
+  - Each page starts with the base blade view, and will need to use a layout file in `./resources/js/layouts/`. This can vary based what we are trying to do (i.e. sections of the app, if a user is logged in, etc).
+- All of our blade views, Inertia Pages, Vue Layouts, Components and UI Components should be written using DaisyUI 5 whenever possible, falling back to TailwindCss 4 when necessary.
+- Also take note of which NPM packages are being imported in our `./package.json` and utilize those librarys as able. (For example, use vueuse/core in our SFC's to simplify and improve readability).
+- Use any helper methods available to us, especially those in our `./resources/js/lib/utils.ts` file.
+- Our general rules for a Vue Component (ultimately this will be limited to anything in `./resources/js/components/ui`)
+  - If I ask for a base component, I am refering to Vue components that have their own directories located in `./resources/js/components/ui/{COMPONENT_NAME}`.
+    - All base components  barrel file (`index.ts`) to handle related exports
+    - Our project uses the ClassVarianceAuthority npm package, so each directory will also contain a `cva.ts` that defines the DasiyUI variants, states, etc.
+    - Breakdown components to their most simplistic functionality (within reason at least) by splitting appart parts of the overall component (i.e. a `Card` component might have `Card.vue`, `CardActions.vue`, `CardBody.vue`, `CardImage.vue` and `CardTitle.vue` which are all exported out on the `index.ts`)
+    - Write interfaces or types for each component and make sure they are available to the project as well. Be thorough - type safety and excelent type definitions for IDE intelesense are VERY VERY important.
+    - Lastly we will use Storybook to document the UI library, so also write the required files for that to a subdirectory inside the component's folder.
+  - If the base component I asked for already exists in this location, I would only like to edit the existing files to use daisyUi 5, and my theme in `./resources/css/app.css`. You may also make refactoring suggestions that would make future coding easier. Split any complex components into multiple Vue components that are loaded by the main one.
+  - If the base component does not exist, please use these same guidelines to create the component in that location with as many Vue files as make sense for the request.
+  - If I ask for a component (not a base component) The idea would be to use one or more base components to construct an app specific component. These would live in `./resources/js/components/`
+- ALWAYS Ask for clarification on any points you don't know for certian, or if you need more information on my part.
+
 # daisyUI 5
 
 daisyUI 5 is a CSS library for Tailwind CSS 4
