@@ -1,12 +1,14 @@
 import "../css/app.css";
+import { initializeTheme } from "./composables/useAppearance";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import type { DefineComponent } from "vue";
-import { createApp, h } from "vue";
+import { createApp, h, type DefineComponent } from "vue";
 import { ZiggyVue } from "ziggy-js";
-import { initializeTheme } from "./composables/useAppearance";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+
+// Should run before mounting Vue app - This will set light / dark mode on page load.
+initializeTheme();
 
 createInertiaApp({
   title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -21,6 +23,3 @@ createInertiaApp({
     color: "oklch(75.351% 0.138 232.661)",
   },
 });
-
-// This will set light / dark mode on page load...
-initializeTheme();

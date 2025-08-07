@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 
 export const drawerVariants = cva("drawer", {
   variants: {
@@ -21,3 +21,5 @@ export const drawerVariants = cva("drawer", {
     responsive: "none",
   },
 });
+
+export type DrawerVariantProps = VariantProps<typeof drawerVariants>;

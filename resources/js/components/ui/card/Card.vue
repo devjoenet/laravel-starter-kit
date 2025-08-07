@@ -1,6 +1,9 @@
 <script lang="ts" setup>
   import { type HTMLAttributes } from "vue";
   import { cardVariants, type CardVariantProps } from "./cva";
+  import CardBody from "./CardBody.vue";
+  import CardActions from "./CardActions.vue";
+  import CardTitle from "./CardTitle.vue";
   import { cn } from "@/lib/utils";
 
   const props: CardVariantProps = defineProps<{
@@ -18,9 +21,9 @@
     <slot name="image" />
     <CardBody>
       <template #default>
-        <CardHeader v-if="$slots.header">
+        <CardTitle v-if="$slots.header">
           <slot name="header" />
-        </CardHeader>
+        </CardTitle>
         <slot />
         <CardActions v-if="$slots.actions">
           <slot name="actions" />
