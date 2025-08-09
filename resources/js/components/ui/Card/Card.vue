@@ -6,21 +6,9 @@
   import CardTitle from "./CardTitle.vue";
   import { cn } from "@/lib/utils";
 
-  const props = defineProps<CardVariantProps & { class?: HTMLAttributes["class"] }>();
+  const { variant, style, side, imageFull, size, shadow, class: className } = defineProps<CardVariantProps & { class?: HTMLAttributes["class"] }>();
 
-  const classes = computed(() =>
-    cn(
-      cardVariants({
-        variant: props.variant,
-        style: props.style,
-        side: props.side,
-        imageFull: props.imageFull,
-        size: props.size,
-        shadow: props.shadow,
-      }),
-      props.class,
-    ),
-  );
+  const classes = computed(() => cn(cardVariants({ variant, style, side, imageFull, size, shadow }), className));
 </script>
 
 <template>
