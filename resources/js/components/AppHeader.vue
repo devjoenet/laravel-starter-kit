@@ -4,7 +4,7 @@
   import Breadcrumbs from "@/components/Breadcrumbs.vue";
   import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
   import { Button } from "@/components/ui/button";
-  import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+  import { Dropdown } from "@/components/ui/Dropdown";
   import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
   import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
   import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -146,8 +146,8 @@
             </div>
           </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger :as-child="true">
+          <Dropdown placement="end">
+            <template #trigger>
               <Button variant="ghost" size="icon" class="relative size-10 w-auto rounded-box-full p-1 focus-within:ring-2 focus-within:ring-primary">
                 <Avatar class="size-8 overflow-hidden rounded-box-full">
                   <AvatarImage v-if="auth.user.avatar" :src="auth.user.avatar" :alt="auth.user.name" />
@@ -156,11 +156,9 @@
                   </AvatarFallback>
                 </Avatar>
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" class="w-56">
-              <UserMenuContent :user="auth.user" />
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </template>
+            <UserMenuContent :user="auth.user" />
+          </Dropdown>
         </div>
       </div>
     </div>

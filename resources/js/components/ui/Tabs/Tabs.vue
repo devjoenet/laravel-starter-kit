@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { provide, ref, watch, computed } from "vue";
+  import { provide, ref, computed } from "vue";
   import { useMotion } from "@vueuse/motion";
   import { tabsVariants } from "./cva";
 

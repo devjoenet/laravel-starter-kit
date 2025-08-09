@@ -15,6 +15,12 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: "todo",
     },
+    darkMode: {
+      darkClass: "night",
+      lightClass: "winter",
+      classTarget: "html",
+      stylePreview: true,
+    },
   },
 };
 
