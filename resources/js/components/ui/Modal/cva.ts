@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-export const modalVariants = cva("modal", {
+export const modalContentVariants = cva("modal-box relative p-6 bg-base-100 rounded-lg shadow-lg", {
   variants: {
     size: {
       sm: "modal-sm",

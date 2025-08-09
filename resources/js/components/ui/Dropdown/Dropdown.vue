@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-  import { computed, ref, onMounted, onUnmounted } from "vue";
-  import { dropdownVariants } from "./dropdown.cva";
+  import { computed, ref } from "vue";
+  import { dropdownVariants } from "./cva";
 
   const props = defineProps<{
     placement?: "start" | "center" | "end" | "top" | "bottom" | "left" | "right";
