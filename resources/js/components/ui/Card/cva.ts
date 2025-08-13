@@ -1,51 +1,29 @@
-import { cva, VariantProps } from "class-variance-authority";
+// resources/js/components/ui/Card/cva.ts
+import { cva } from "class-variance-authority";
 
-export const cardVariants = cva(["card", "overflow-hidden"], {
-  variants: {
-    variant: {
-      base: "bg-base-100 text-base-content",
-      primary: "bg-primary text-primary-content",
-      secondary: "bg-secondary text-secondary-content",
-      info: "bg-info text-info-content",
-      success: "bg-success text-success-content",
-      warning: "bg-warning text-warning-content",
-      error: "bg-error text-error-content",
+// Runtime CVA
+export const cardVariants = cva(
+  "card shadow bg-base-100",
+  {
+    variants: {
+      variant: {
+        filled: "",              // default daisyui card
+        outlined: "border",
+        ghost: "bg-transparent shadow-none",
+      },
+      size: {
+        sm: "p-4",
+        md: "p-6",
+        lg: "p-8",
+      },
     },
-    shadow: {
-      none: "shadow-none",
-      sm: "shadow-sm",
-      md: "shadow-md",
-      lg: "shadow-lg",
+    defaultVariants: {
+      variant: "filled",
+      size: "md",
     },
-    style: {
-      none: "",
-      bordered: "card-border",
-      dash: "card-dash",
-    },
-    side: {
-      vertical: "",
-      horizontal: "card-side",
-    },
-    imageFull: {
-      true: "image-full",
-      false: "",
-    },
-    size: {
-      xs: "card-xs",
-      sm: "card-sm",
-      md: "card-md",
-      lg: "card-lg",
-      xl: "card-xl",
-    },
-  },
-  defaultVariants: {
-    variant: "base",
-    shadow: "none",
-    style: "none",
-    side: "vertical",
-    imageFull: false,
-    size: "md",
-  },
-});
+  }
+);
 
-export type CardVariantProps = VariantProps<typeof cardVariants>;
+// Explicit unions (avoid VariantProps to keep compiler happy)
+export type CardVariant = "filled" | "outlined" | "ghost";
+export type CardSize = "sm" | "md" | "lg";

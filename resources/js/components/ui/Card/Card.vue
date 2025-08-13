@@ -1,18 +1,33 @@
 <script lang="ts" setup>
-  import { computed, type HTMLAttributes } from "vue";
-  import { cardVariants, type CardVariantProps } from "./cva";
+  import { computed } from "vue";
+  import { cardVariants, type CardVariant, type CardSize } from "./cva";
+
   import CardBody from "./CardBody.vue";
   import CardActions from "./CardActions.vue";
   import CardTitle from "./CardTitle.vue";
   import { cn } from "@/lib/utils";
 
-  const { variant, style, side, imageFull, size, shadow, class: className } = defineProps<CardVariantProps & { class?: HTMLAttributes["class"] }>();
+  defineOptions({ name: "UiCard" });
 
-  const classes = computed(() => cn(cardVariants({ variant, style, side, imageFull, size, shadow }), className));
+  interface Props {
+    variant?: CardVariant;
+    size?: CardSize;
+    class?: string; // extra classes on outer card
+    as?: keyof HTMLElementTagNameMap | "div";
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    variant: "filled",
+    size: "md",
+    class: "",
+    as: "div",
+  });
+
+  const rootClass = computed(() => cn(cardVariants({ variant: props.variant, size: props.size }), props.class));
 </script>
 
 <template>
-  <div :class="classes">
+  <component :is="as" :class="rootClass">
     <slot name="image" />
     <CardBody>
       <template #default>
@@ -25,5 +40,5 @@
         </CardActions>
       </template>
     </CardBody>
-  </div>
+  </component>
 </template>
